@@ -15,6 +15,7 @@ import {
   AllMoments,
 } from './pages/CreatePost';
 import Camera from './pages/Camera';
+import JourneyDone from './pages/CreatePost/JourneyDone';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -51,6 +52,15 @@ const Routes = () => (
         options={{
           headerStyle: navigatorStyle.pageHeader,
           headerShown: true,
+          title: false,
+        }}
+      />
+      <RootStack.Screen
+        name="JourneyDone"
+        component={JourneyDone}
+        options={{
+          headerStyle: navigatorStyle.pageHeader,
+          headerShown: false,
           title: false,
         }}
       />

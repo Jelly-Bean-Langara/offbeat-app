@@ -8,6 +8,7 @@ import { navigatorStyle, buttons } from '../../layout';
 // Routes
 import Home from './Home';
 import Post from './Post';
+import Category from './Category';
 
 // Assets
 import { PlusButton } from '../../assets';
@@ -36,6 +37,14 @@ const MainRoutes = ({ navigation }) => {
       <Stack.Screen
         name="Post"
         component={Post}
+        options={{
+          title: false,
+          headerStyle: navigatorStyle.pageHeader,
+        }}
+      />
+      <Stack.Screen
+        name="Category"
+        component={Category}
         options={{
           title: false,
           headerStyle: navigatorStyle.pageHeader,

@@ -8,8 +8,8 @@ const SelectCategory = ({ navigation }) => {
 
   useEffect(() => {
     async function getCategories() {
-      // const result = await api.get('/get-all-categories');
-      // setCategories(result.data);
+      const result = await api.get('/get-all-categories');
+      setCategories(result.data);
     }
 
     getCategories();

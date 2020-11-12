@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { View, Button, Image, Platform } from 'react-native';
@@ -21,6 +21,16 @@ const CreateMoment = ({ route, navigation }) => {
   const [locationName, setLocationName] = useState('Canada');
 
   const { postId } = route.params;
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setDate(new Date());
+      setDescription('');
+      setPhotos([]);
+    });
+
+    return unsubscribe;
+  }, []);
 
   const handleGetPhotos = () => {
     CameraRoll.getPhotos({
@@ -64,6 +74,7 @@ const CreateMoment = ({ route, navigation }) => {
           locationName,
         })
         .then((res) => {
+          setDescription('');
           navigation.navigate('AllMoments', { postId });
         })
         .catch((err) => {
@@ -104,6 +115,7 @@ const CreateMoment = ({ route, navigation }) => {
       </ScrollView>
       <TextInput
         multiline
+        value={description}
         placeholder={placeholder}
         style={inputs.text}
         onChangeText={(value) => setDescription(value)}
