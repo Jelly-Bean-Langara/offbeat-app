@@ -9,6 +9,7 @@ import inputs from './inputs';
 import fontsStyle from './fontsStyle';
 import createMomentStyle from './createMomentStyle';
 import cameraStyle from './cameraStyle';
+import profileStyle from './profileStyle';
 
 export {
   containers,
@@ -22,4 +23,5 @@ export {
   fontsStyle,
   createMomentStyle,
   cameraStyle,
+  profileStyle,
 };
