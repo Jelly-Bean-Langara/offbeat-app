@@ -114,7 +114,7 @@ const profileStyle = EStyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: '.75rem',
-    marginRight: '1rem'
+    marginRight: '3rem'
   },
 
   titleMoments: {
