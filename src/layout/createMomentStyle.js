@@ -61,6 +61,22 @@ const createMomentStyle = EStyleSheet.create({
     width: '20%',
     alignItems: 'center',
   },
+  selectedPicturesWrapper: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '100%',
+    paddingTop: '1rem',
+  },
+  selectedPictureBtn: {
+    width: 80,
+    height: 80,
+    marginBottom: '1rem',
+  },
+  selectedPicture: {
+    width: 80,
+    height: 80,
+    borderRadius: '1rem',
+  },
 });
 
 export default createMomentStyle;

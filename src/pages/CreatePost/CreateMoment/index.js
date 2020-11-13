@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import {
@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Toast from 'react-native-simple-toast';
-import CameraView from '../../Camera';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { RNCamera } from 'react-native-camera';
 
 // Styles
 import api from '../../../services/api';
@@ -22,10 +23,12 @@ import {
   createMomentStyle,
   fontsStyle,
   inputs,
+  cameraStyle,
 } from '../../../layout';
 import { monthNow } from '../../../config/datesArray';
 import fontStyle from '../../../layout/fontsStyle';
 import { Camera } from '../../../assets/static';
+import cameraRollStyle from '../../../layout/cameraRollStyle';
 
 const CreateMoment = ({ route, navigation }) => {
   const [photos, setPhotos] = useState([]);
@@ -40,8 +43,11 @@ const CreateMoment = ({ route, navigation }) => {
   const [latitude, setLatitude] = useState(1);
   const [longitude, setLongitude] = useState(1);
   const [locationName, setLocationName] = useState('Canada');
+  const [cameraModal, setCameraModal] = useState(false);
+  const [selectedPhotos, setSelectedPhotos] = useState([]);
 
   const { postId } = route.params;
+  const cameraRef = useRef(null);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -67,9 +73,26 @@ const CreateMoment = ({ route, navigation }) => {
       });
   };
 
+  const takePicture = async () => {
+    const options = { quality: 0.5, base64: true };
+    cameraRef.current
+      .takePictureAsync(options)
+      .then((data) => {
+        CameraRoll.save(data.uri)
+          .then(() => {
+            handleGetPhotos();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    // setShow(Platform.OS === 'ios');
     setDate(currentDate);
     setDay(currentDate.getDate());
     setMonth(monthNow[currentDate.getMonth()]);
@@ -86,6 +109,25 @@ const CreateMoment = ({ route, navigation }) => {
 
   const hideDatePicker = () => {
     setShow(false);
+  };
+
+  const showCameraModal = () => {
+    setCameraModal(true);
+    handleGetPhotos();
+  };
+
+  const hideCameraModal = () => {
+    setCameraModal(false);
+  };
+
+  const selectPicture = (picture) => {
+    if (selectedPhotos.length >= 6) {
+      selectedPhotos.shift();
+      setSelectedPhotos([...selectedPhotos, picture]);
+    } else {
+      setSelectedPhotos([...selectedPhotos, picture]);
+    }
+    hideCameraModal();
   };
 
   const handleSubmit = () => {
@@ -178,6 +220,27 @@ const CreateMoment = ({ route, navigation }) => {
         onChangeText={(value) => setDescription(value)}
       />
 
+      <View style={[createMomentStyle.selectedPicturesWrapper]}>
+        {selectedPhotos.map((photo, index) => (
+          <Pressable
+            key={index}
+            style={[
+              EStyleSheet.child(
+                createMomentStyle,
+                'selectedPictureBtn',
+                index,
+                selectedPhotos.length
+              ),
+            ]}
+          >
+            <Image
+              source={{ uri: photo }}
+              style={[createMomentStyle.selectedPicture]}
+            />
+          </Pressable>
+        ))}
+      </View>
+
       {show ? (
         <>
           <DateTimePicker
@@ -196,7 +259,7 @@ const CreateMoment = ({ route, navigation }) => {
       )}
 
       <View style={[createMomentStyle.bottom]}>
-        <Pressable onPress={handleGetPhotos} style={[createMomentStyle.camera]}>
+        <Pressable onPress={showCameraModal} style={[createMomentStyle.camera]}>
           <Image source={Camera} />
         </Pressable>
         <Pressable
@@ -215,17 +278,42 @@ const CreateMoment = ({ route, navigation }) => {
         </Pressable>
       </View>
 
-      <Modal animationType="slide">
+      <Modal animationType="slide" visible={cameraModal}>
         <SafeAreaView>
-          <CameraView />
-          <ScrollView style={createMomentStyle.horizontalScroll}>
-            {photos.map((photo, index) => (
-              <Image
-                key={index}
-                style={{ height: 100, width: 100 }}
-                source={{ uri: photo.node.image.uri }}
-              />
-            ))}
+          <Button title="Close" onPress={hideCameraModal} />
+          <RNCamera
+            ref={cameraRef}
+            style={cameraStyle.body}
+            type={RNCamera.Constants.Type.front}
+            androidCameraPermissionOptions={{
+              title: 'Permission to use camera',
+              message: 'We need your permission to use your camera',
+              buttonPositive: 'Ok',
+              buttonNegative: 'Cancel',
+            }}
+            androidRecordAudioPermissionOptions={{
+              title: 'Permission to use audio recording',
+              message: 'We need your permission to use your audio',
+              buttonPositive: 'Ok',
+              buttonNegative: 'Cancel',
+            }}
+          />
+          <Button title="Snap" onPress={takePicture} />
+          <ScrollView style={[cameraRollStyle.wrapper]}>
+            <View style={[cameraRollStyle.inner]}>
+              {photos.map((photo, index) => (
+                <Pressable
+                  style={[cameraRollStyle.pictureBtn]}
+                  onPress={() => selectPicture(photo.node.image.uri)}
+                >
+                  <Image
+                    key={index}
+                    style={[cameraRollStyle.picture]}
+                    source={{ uri: photo.node.image.uri }}
+                  />
+                </Pressable>
+              ))}
+            </View>
           </ScrollView>
         </SafeAreaView>
       </Modal>
