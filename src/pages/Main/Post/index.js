@@ -3,14 +3,14 @@ import { Text, View, Image, ImageBackground } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
-import Picture from '../../../assets/picture.png';
+import TestPicture from '../../../assets/static';
 
 // Styles
 import { containers, postStyle } from '../../../layout';
 
 const Post = ({ navigation }) => {
   const [postData, setPostData] = useState({
-    cover: Picture,
+    cover: TestPicture,
     title: 'Vacouver Island',
     country: 'Canada',
     category: 'Weekend Getaway',
@@ -20,10 +20,10 @@ const Post = ({ navigation }) => {
       date: 'October 29, 2020',
       location: 'Vancouver Island',
       time: '10:30PM',
-      cover: Picture,
+      cover: TestPicture,
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis ducimus deserunt non provident voluptatibus exercitationem aliquid voluptates repellat, hic quasi maxime cum praesentium, harum consectetur reprehenderit repellendus eaque tempore eos!',
-      pictures: [Picture, Picture, Picture],
+      pictures: [TestPicture, TestPicture, TestPicture],
     },
   ]);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -40,7 +40,7 @@ const Post = ({ navigation }) => {
           height: 300,
         }}
       >
-        <Image source={Picture} style={{ width: 200 }} />
+        <Image source={TestPicture} style={{ width: 200 }} />
       </View>
     ),
     []

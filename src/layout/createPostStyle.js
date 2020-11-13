@@ -1,5 +1,4 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import colors from './colors';
 
 const createPostStyle = EStyleSheet.create({
   wrapper: {
@@ -7,6 +6,9 @@ const createPostStyle = EStyleSheet.create({
   },
   contentBg: {
     flex: 1,
+    alignSelf: 'center',
+    marginTop: '2rem',
+    marginBottom: '2rem',
   },
 });
 

@@ -15,6 +15,7 @@ import {
   AllMoments,
 } from './pages/CreatePost';
 import Camera from './pages/Camera';
+import JourneyDone from './pages/CreatePost/JourneyDone';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -30,7 +31,10 @@ const TabRoutes = () => {
 
 const Routes = () => (
   <NavigationContainer>
-    <RootStack.Navigator mode="modal">
+    <RootStack.Navigator
+      mode="modal"
+      screenOptions={{ headerBackTitleVisible: false }}
+    >
       <RootStack.Screen
         name="Main"
         component={TabRoutes}
@@ -51,6 +55,15 @@ const Routes = () => (
         options={{
           headerStyle: navigatorStyle.pageHeader,
           headerShown: true,
+          title: false,
+        }}
+      />
+      <RootStack.Screen
+        name="JourneyDone"
+        component={JourneyDone}
+        options={{
+          headerStyle: navigatorStyle.pageHeader,
+          headerShown: false,
           title: false,
         }}
       />
