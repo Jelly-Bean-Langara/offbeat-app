@@ -1,10 +1,10 @@
 import CameraRoll from '@react-native-community/cameraroll';
 import React, { useRef } from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
 // Styles
-import cameraStyle from '../../layout/cameraStyle';
+import { cameraStyle } from '../../layout';
 
 const Camera = () => {
   const cameraRef = useRef(null);

@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import { View, Button, Image, Text, Pressable } from 'react-native';
+import {
+  View,
+  Button,
+  Image,
+  Text,
+  Pressable,
+  Modal,
+  SafeAreaView,
+} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Toast from 'react-native-simple-toast';
+import CameraView from '../../Camera';
 
 // Styles
 import api from '../../../services/api';
@@ -117,7 +126,7 @@ const CreateMoment = ({ route, navigation }) => {
       <View style={createMomentStyle.top}>
         <Pressable onPress={displayDatePicker}>
           <Text
-            style={[buttons.textBig, buttons.loginTextAlt]}
+            style={[buttons.textBig, buttons.confirmTextAlt]}
           >{`${day} ${month}, ${year}`}</Text>
         </Pressable>
         <Pressable
@@ -186,16 +195,6 @@ const CreateMoment = ({ route, navigation }) => {
         <Text />
       )}
 
-      <ScrollView>
-        {photos.map((photo, index) => (
-          <Image
-            key={index}
-            style={{ height: 100, width: 100 }}
-            source={{ uri: photo.node.image.uri }}
-          />
-        ))}
-      </ScrollView>
-
       <View style={[createMomentStyle.bottom]}>
         <Pressable onPress={handleGetPhotos} style={[createMomentStyle.camera]}>
           <Image source={Camera} />
@@ -215,6 +214,21 @@ const CreateMoment = ({ route, navigation }) => {
           </Text>
         </Pressable>
       </View>
+
+      <Modal animationType="slide">
+        <SafeAreaView>
+          <CameraView />
+          <ScrollView style={createMomentStyle.horizontalScroll}>
+            {photos.map((photo, index) => (
+              <Image
+                key={index}
+                style={{ height: 100, width: 100 }}
+                source={{ uri: photo.node.image.uri }}
+              />
+            ))}
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
     </View>
   );
 };

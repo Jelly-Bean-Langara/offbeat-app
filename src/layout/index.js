@@ -8,6 +8,7 @@ import selectCategoryStyle from './selectCategoryStyle';
 import inputs from './inputs';
 import fontsStyle from './fontsStyle';
 import createMomentStyle from './createMomentStyle';
+import cameraStyle from './cameraStyle';
 
 export {
   containers,
@@ -20,4 +21,5 @@ export {
   inputs,
   fontsStyle,
   createMomentStyle,
+  cameraStyle,
 };
