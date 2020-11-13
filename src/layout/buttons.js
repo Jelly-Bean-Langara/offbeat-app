@@ -24,6 +24,9 @@ const buttons = EStyleSheet.create({
     color: colors.$primary,
     fontWeight: 'bold',
   },
+  confirmAlt: {
+    backgroundColor: colors.$secondary,
+  },
   small: {
     padding: '.5rem',
     borderRadius: '.8rem',

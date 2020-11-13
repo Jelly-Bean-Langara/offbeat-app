@@ -11,7 +11,7 @@ import Post from './Post';
 import Category from './Category';
 
 // Assets
-import { PlusButton } from '../../assets';
+import { PlusButton } from '../../assets/static';
 
 const Stack = createStackNavigator();
 

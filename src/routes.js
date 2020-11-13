@@ -31,7 +31,10 @@ const TabRoutes = () => {
 
 const Routes = () => (
   <NavigationContainer>
-    <RootStack.Navigator mode="modal">
+    <RootStack.Navigator
+      mode="modal"
+      screenOptions={{ headerBackTitleVisible: false }}
+    >
       <RootStack.Screen
         name="Main"
         component={TabRoutes}

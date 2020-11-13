@@ -4,6 +4,9 @@ import createPostStyle from './createPostStyle';
 import navigatorStyle from './navigatorStyle';
 import postStyle from './postStyle';
 import homeStyle from './homeStyle';
+import selectCategoryStyle from './selectCategoryStyle';
+import inputs from './inputs';
+import fontsStyle from './fontsStyle';
 
 export {
   containers,
@@ -12,4 +15,7 @@ export {
   navigatorStyle,
   postStyle,
   homeStyle,
+  selectCategoryStyle,
+  inputs,
+  fontsStyle,
 };

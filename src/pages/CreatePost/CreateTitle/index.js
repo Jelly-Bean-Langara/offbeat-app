@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Button, ImageBackground, Text } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Toast from 'react-native-simple-toast';
-import { TextureBackground } from '../../../assets';
+import { TextureBackground } from '../../../assets/static';
 
 // Styles
-import { containers, createPostStyle } from '../../../layout';
-import inputs from '../../../layout/inputs';
+import { containers, createPostStyle, inputs } from '../../../layout';
 import api from '../../../services/api';
 
 const CreateTitle = ({ route, navigation }) => {

@@ -4,8 +4,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { ScrollView } from 'react-native-gesture-handler';
 import { weekday, monthNow } from '../../../config/datesArray';
 
-import Picture from '../../../assets/picture.png';
-import CallToCardBg from '../../../assets/call-to-card-bg.jpg';
+import { TestPicture, CallToCardBg } from '../../../assets/static';
 
 // Styles
 import { containers, buttons, homeStyle } from '../../../layout';
@@ -55,14 +54,16 @@ const Home = ({ navigation }) => {
           <Text style={homeStyle.callToText}>
             Plan ahead or make a time capsule of a trip
           </Text>
-          <Text style={[buttons.login, buttons.loginText, buttons.fullSize]}>
+          <Text
+            style={[buttons.confirmAlt, buttons.loginText, buttons.fullSize]}
+          >
             Let&apos;s start
           </Text>
         </ImageBackground>
       </Pressable>
 
-      {content.map((category) => (
-        <>
+      {content.map((category, i) => (
+        <View key={i}>
           <View style={homeStyle.divisor} key={category.category_id}>
             <Text style={homeStyle.categoryTitle}>
               {category.category_title}
@@ -89,7 +90,7 @@ const Home = ({ navigation }) => {
               >
                 <View style={homeStyle.cardFigure}>
                   <Image
-                    source={Picture}
+                    source={TestPicture}
                     style={[containers.images, homeStyle.images]}
                     resizeMode="cover"
                   />
@@ -105,7 +106,7 @@ const Home = ({ navigation }) => {
               </Pressable>
             ))}
           </ScrollView>
-        </>
+        </View>
       ))}
       <View style={containers.whiteSpace} />
     </ScrollView>
