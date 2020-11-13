@@ -14,7 +14,7 @@ import {
   CreateMoment,
   AllMoments,
 } from './pages/CreatePost';
-import Camera from './pages/Camera';
+import Profile from  './pages/Profile';
 import JourneyDone from './pages/CreatePost/JourneyDone';
 
 const Tab = createBottomTabNavigator();
@@ -24,7 +24,7 @@ const TabRoutes = () => {
   return (
     <Tab.Navigator tabBarOptions={{ tabStyle: navigatorStyle.tabNav }}>
       <Tab.Screen name="Journals" component={Main} />
-      <Tab.Screen name="Camera" component={Camera} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 };
@@ -85,11 +85,7 @@ const Routes = () => (
           title: false,
         }}
       />
-      <RootStack.Screen
-        name="CameraTest"
-        component={Camera}
-        options={{ headerStyle: navigatorStyle.pageHeader, headerShown: false }}
-      />
+
     </RootStack.Navigator>
   </NavigationContainer>
 );
