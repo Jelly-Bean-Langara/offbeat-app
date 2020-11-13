@@ -36,12 +36,12 @@ const profileStyle = EStyleSheet.create({
     borderRadius: 100,
     overflow: 'hidden',
     position: 'absolute',
-    top: '10rem',
+    top: '9rem',
     right: '-6.5rem'
   },
 
   containerUserSum: {
-    marginTop: '7rem'
+    marginTop: '6rem'
   },
 
   profileBtn: {
