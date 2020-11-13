@@ -6,6 +6,9 @@ const createPostStyle = EStyleSheet.create({
   },
   contentBg: {
     flex: 1,
+    alignSelf: 'center',
+    marginTop: '2rem',
+    marginBottom: '2rem',
   },
 });
 

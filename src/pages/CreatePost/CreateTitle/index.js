@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-import { Button, ImageBackground, Text } from 'react-native';
+import { Button, Image, Pressable, Text } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Toast from 'react-native-simple-toast';
 import { TextureBackground } from '../../../assets/static';
 
 // Styles
-import { containers, createPostStyle, inputs } from '../../../layout';
+import {
+  buttons,
+  containers,
+  createPostStyle,
+  inputs,
+  selectCategoryStyle,
+} from '../../../layout';
+import fontStyle from '../../../layout/fontsStyle';
 import api from '../../../services/api';
 
 const CreateTitle = ({ route, navigation }) => {
@@ -36,7 +43,12 @@ const CreateTitle = ({ route, navigation }) => {
 
   return (
     <ScrollView style={[containers.container, createPostStyle.wrapper]}>
-      <Text>Give a NAME for your journal</Text>
+      <Text style={[selectCategoryStyle.pageTitle, fontStyle.bold]}>
+        Give a <Text style={selectCategoryStyle.pageTitleAlt}>NAME</Text>
+      </Text>
+      <Text style={[selectCategoryStyle.pageTitle2, fontStyle.bold]}>
+        for your journal
+      </Text>
       <TextInput
         style={inputs.text}
         onChangeText={(value) => setTitle(value)}
@@ -45,11 +57,12 @@ const CreateTitle = ({ route, navigation }) => {
         onSubmitEditing={handleSubmit}
         maxLength={20}
       />
-      <ImageBackground
-        source={TextureBackground}
-        style={createPostStyle.contentBg}
-      />
-      <Button title="Create Journal" onPress={handleSubmit} />
+      <Image source={TextureBackground} style={createPostStyle.contentBg} />
+      <Pressable onPress={handleSubmit} style={[buttons.login, buttons.big]}>
+        <Text style={[buttons.loginText, fontStyle.medium, buttons.textBig]}>
+          Create Journal
+        </Text>
+      </Pressable>
     </ScrollView>
   );
 };
