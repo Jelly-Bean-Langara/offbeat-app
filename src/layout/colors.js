@@ -10,6 +10,7 @@ const colors = EStyleSheet.create({
   $neutral3: '#c4cbca',
   $neutral4: '#f7f7f7',
   $lightBg: '#ffff',
+  $bgInput: '#E8E8E8',
 });
 
 export default colors;

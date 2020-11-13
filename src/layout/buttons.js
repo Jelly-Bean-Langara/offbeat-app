@@ -24,9 +24,22 @@ const buttons = EStyleSheet.create({
     color: colors.$primary,
     fontWeight: 'bold',
   },
+  confirmAlt: {
+    backgroundColor: colors.$secondary,
+  },
   small: {
     padding: '.5rem',
     borderRadius: '.8rem',
+  },
+  big: {
+    padding: '1.2rem',
+    borderRadius: '1rem',
+    width: '50%',
+    alignSelf: 'center',
+  },
+  textBig: {
+    fontSize: '1.1rem',
+    textAlign: 'center',
   },
   fullSize: {
     flex: 1,

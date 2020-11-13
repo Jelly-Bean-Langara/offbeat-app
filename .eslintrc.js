@@ -24,5 +24,6 @@ module.exports = {
     'react/prop-types': 'off',
     'no-unused-vars': 'warn',
     'react/no-array-index-key': 'off',
+    'global-require': 'off',
   },
 };

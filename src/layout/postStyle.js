@@ -1,5 +1,4 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import colors from './colors';
 
 const postStyle = EStyleSheet.create({
   cover: {
