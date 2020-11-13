@@ -7,6 +7,7 @@ import homeStyle from './homeStyle';
 import selectCategoryStyle from './selectCategoryStyle';
 import inputs from './inputs';
 import fontsStyle from './fontsStyle';
+import createMomentStyle from './createMomentStyle';
 
 export {
   containers,
@@ -18,4 +19,5 @@ export {
   selectCategoryStyle,
   inputs,
   fontsStyle,
+  createMomentStyle,
 };

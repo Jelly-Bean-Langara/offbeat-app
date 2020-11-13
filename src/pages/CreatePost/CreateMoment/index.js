@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import { View, Button, Image, Platform } from 'react-native';
+import { View, Button, Image, Text, Pressable } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Toast from 'react-native-simple-toast';
 
 // Styles
-import inputs from '../../../layout/inputs';
 import api from '../../../services/api';
+import {
+  buttons,
+  containers,
+  createMomentStyle,
+  fontsStyle,
+  inputs,
+} from '../../../layout';
+import { monthNow } from '../../../config/datesArray';
+import fontStyle from '../../../layout/fontsStyle';
+import { Camera } from '../../../assets/static';
 
 const CreateMoment = ({ route, navigation }) => {
   const [photos, setPhotos] = useState([]);
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date());
+  const [day, setDay] = useState(new Date().getDate());
+  const [month, setMonth] = useState(monthNow[new Date().getMonth()]);
+  const [year, setYear] = useState(new Date().getFullYear());
   const [placeholder, setPlaceholder] = useState('Type your text here');
   const [description, setDescription] = useState('');
   const [latitude, setLatitude] = useState(1);
@@ -48,12 +60,23 @@ const CreateMoment = ({ route, navigation }) => {
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
+    // setShow(Platform.OS === 'ios');
     setDate(currentDate);
+    setDay(currentDate.getDate());
+    setMonth(monthNow[currentDate.getMonth()]);
+    setYear(currentDate.getFullYear());
   };
 
   const handleGuide = (text) => {
     setPlaceholder(text);
+  };
+
+  const displayDatePicker = () => {
+    setShow(true);
+  };
+
+  const hideDatePicker = () => {
+    setShow(false);
   };
 
   const handleSubmit = () => {
@@ -90,7 +113,79 @@ const CreateMoment = ({ route, navigation }) => {
   };
 
   return (
-    <View>
+    <View style={[containers.container, createMomentStyle.wrapper]}>
+      <View style={createMomentStyle.top}>
+        <Pressable onPress={displayDatePicker}>
+          <Text
+            style={[buttons.textBig, buttons.loginTextAlt]}
+          >{`${day} ${month}, ${year}`}</Text>
+        </Pressable>
+        <Pressable
+          onPress={displayDatePicker}
+          style={[createMomentStyle.location]}
+        >
+          <Text style={[createMomentStyle.locationText, fontStyle.medium]}>
+            Location
+          </Text>
+        </Pressable>
+      </View>
+
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={createMomentStyle.horizontalScroll}
+      >
+        <Pressable
+          style={createMomentStyle.guides}
+          onPress={() => handleGuide('Unguided')}
+        >
+          <Text style={[createMomentStyle.guidesText, fontStyle.medium]}>
+            unguided
+          </Text>
+        </Pressable>
+        <Pressable
+          style={createMomentStyle.guides}
+          onPress={() => handleGuide('Day Summary')}
+        >
+          <Text style={[createMomentStyle.guidesText, fontStyle.medium]}>
+            day summary
+          </Text>
+        </Pressable>
+        <Pressable
+          style={createMomentStyle.guides}
+          onPress={() => handleGuide('Worth Seeing')}
+        >
+          <Text style={[createMomentStyle.guidesText, fontStyle.medium]}>
+            worth seeing
+          </Text>
+        </Pressable>
+      </ScrollView>
+
+      <TextInput
+        multiline
+        value={description}
+        placeholder={placeholder}
+        style={[inputs.text, inputs.bigArea]}
+        onChangeText={(value) => setDescription(value)}
+      />
+
+      {show ? (
+        <>
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour
+            display="spinner"
+            onChange={onChange}
+            style={{ height: 300 }}
+          />
+          <Button title="Done" onPress={hideDatePicker} />
+        </>
+      ) : (
+        <Text />
+      )}
+
       <ScrollView>
         {photos.map((photo, index) => (
           <Image
@@ -100,28 +195,26 @@ const CreateMoment = ({ route, navigation }) => {
           />
         ))}
       </ScrollView>
-      <DateTimePicker
-        testID="dateTimePicker"
-        value={date}
-        mode={mode}
-        is24Hour
-        display="default"
-        onChange={onChange}
-      />
-      <ScrollView horizontal>
-        <Button title="Unguided" onPress={() => handleGuide('')} />
-        <Button title="Food" onPress={() => handleGuide('Delicious food')} />
-        <Button title="Trail" onPress={() => handleGuide('Nice trail')} />
-      </ScrollView>
-      <TextInput
-        multiline
-        value={description}
-        placeholder={placeholder}
-        style={inputs.text}
-        onChangeText={(value) => setDescription(value)}
-      />
-      <Button onPress={handleGetPhotos} title="Load Images" />
-      <Button onPress={handleSubmit} title="Save Moment" />
+
+      <View style={[createMomentStyle.bottom]}>
+        <Pressable onPress={handleGetPhotos} style={[createMomentStyle.camera]}>
+          <Image source={Camera} />
+        </Pressable>
+        <Pressable
+          onPress={handleSubmit}
+          style={[buttons.confirm, createMomentStyle.saveMomentBtn]}
+        >
+          <Text
+            style={[
+              fontsStyle.medium,
+              buttons.confirmText,
+              createMomentStyle.saveMomentText,
+            ]}
+          >
+            Save Moment
+          </Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
