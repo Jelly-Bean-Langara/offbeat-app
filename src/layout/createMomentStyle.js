@@ -9,19 +9,26 @@ const createMomentStyle = EStyleSheet.create({
     flexGrow: 1,
   },
   location: {
-    width: 100,
+    maxWidth: 150,
     backgroundColor: colors.$semanticPosAlt,
     padding: '.2rem',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
     borderRadius: '1rem',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   locationText: {
     textAlign: 'center',
     color: colors.$primary,
+    marginLeft: '.3rem',
   },
   top: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: '1rem',
+    alignItems: 'center',
   },
   horizontalScroll: {
     paddingRight: '1rem',
@@ -46,6 +53,10 @@ const createMomentStyle = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: '2rem',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   saveMomentBtn: {
     width: '70%',
@@ -72,10 +83,25 @@ const createMomentStyle = EStyleSheet.create({
     height: 80,
     marginBottom: '1rem',
   },
+  'selectedPictureBtn:first-child': {
+    marginLeft: '1rem',
+  },
+  'selectedPictureBtn:nth-child-odd': {
+    marginLeft: '1.4rem',
+    marginRight: '1rem',
+  },
   selectedPicture: {
     width: 80,
     height: 80,
     borderRadius: '1rem',
+  },
+  modalDate: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  modalMap: {
+    flex: 1,
+    justifyContent: 'space-between',
   },
 });
 
