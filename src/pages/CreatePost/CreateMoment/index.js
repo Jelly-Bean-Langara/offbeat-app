@@ -9,11 +9,16 @@ import {
   Pressable,
   Modal,
   SafeAreaView,
+  Keyboard,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Toast from 'react-native-simple-toast';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { RNCamera } from 'react-native-camera';
+import Geolocation from '@react-native-community/geolocation';
+import { GOOGLE_API_KEY } from '@env';
+import PlacesInput from 'react-native-places-input';
+import MapView, { Marker } from 'react-native-maps';
 
 // Styles
 import api from '../../../services/api';
@@ -24,16 +29,14 @@ import {
   fontsStyle,
   inputs,
   cameraStyle,
+  mapStyle,
 } from '../../../layout';
 import { monthNow } from '../../../config/datesArray';
-import fontStyle from '../../../layout/fontsStyle';
-import { Camera } from '../../../assets/static';
+import { Camera, Location } from '../../../assets/static';
 import cameraRollStyle from '../../../layout/cameraRollStyle';
 
 const CreateMoment = ({ route, navigation }) => {
   const [photos, setPhotos] = useState([]);
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date());
   const [day, setDay] = useState(new Date().getDate());
   const [month, setMonth] = useState(monthNow[new Date().getMonth()]);
@@ -45,6 +48,9 @@ const CreateMoment = ({ route, navigation }) => {
   const [locationName, setLocationName] = useState('Canada');
   const [cameraModal, setCameraModal] = useState(false);
   const [selectedPhotos, setSelectedPhotos] = useState([]);
+  const [reload, setReload] = useState(false);
+  const [dateModal, setDateModal] = useState(false);
+  const [locationModal, setLocationModal] = useState(false);
 
   const { postId } = route.params;
   const cameraRef = useRef(null);
@@ -56,8 +62,17 @@ const CreateMoment = ({ route, navigation }) => {
       setPhotos([]);
     });
 
+    Geolocation.getCurrentPosition((info) => {
+      setLatitude(info.coords.latitude);
+      setLongitude(info.coords.longitude);
+    });
+
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    setSelectedPhotos(selectedPhotos);
+  }, [reload]);
 
   const handleGetPhotos = () => {
     CameraRoll.getPhotos({
@@ -66,7 +81,6 @@ const CreateMoment = ({ route, navigation }) => {
     })
       .then((r) => {
         setPhotos(r.edges);
-        console.log(r.edges[1].node.image.uri);
       })
       .catch((err) => {
         console.log(err);
@@ -104,11 +118,11 @@ const CreateMoment = ({ route, navigation }) => {
   };
 
   const displayDatePicker = () => {
-    setShow(true);
+    setDateModal(true);
   };
 
   const hideDatePicker = () => {
-    setShow(false);
+    setDateModal(false);
   };
 
   const showCameraModal = () => {
@@ -120,14 +134,27 @@ const CreateMoment = ({ route, navigation }) => {
     setCameraModal(false);
   };
 
+  const showLocationModal = () => {
+    setLocationModal(true);
+  };
+
+  const hideLocationModal = () => {
+    setLocationModal(false);
+  };
+
   const selectPicture = (picture) => {
-    if (selectedPhotos.length >= 6) {
+    if (selectedPhotos.length >= 8) {
       selectedPhotos.shift();
       setSelectedPhotos([...selectedPhotos, picture]);
     } else {
       setSelectedPhotos([...selectedPhotos, picture]);
     }
     hideCameraModal();
+  };
+
+  const deletePicture = (index) => {
+    selectedPhotos.splice(index, 1);
+    setReload(!reload);
   };
 
   const handleSubmit = () => {
@@ -137,18 +164,25 @@ const CreateMoment = ({ route, navigation }) => {
       formatedDate.getMonth() + 1
     }-${formatedDate.getDate()}`;
 
+    const formData = new FormData();
+    selectedPhotos.map((photo) => {
+      formData.append('photos', photo);
+    });
+    formData.append('postId', postId);
+    formData.append('date', newDate);
+    formData.append('description', description);
+    formData.append('latitude', latitude);
+    formData.append('longitude', longitude);
+    formData.append('locationName', locationName);
+
     if (description !== '') {
       api
-        .post('/create-moment', {
-          postId,
-          date: newDate,
-          description,
-          latitude,
-          longitude,
-          locationName,
+        .post('/create-moment', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
         })
         .then((res) => {
           setDescription('');
+          setSelectedPhotos([]);
           navigation.navigate('AllMoments', { postId });
         })
         .catch((err) => {
@@ -168,15 +202,16 @@ const CreateMoment = ({ route, navigation }) => {
       <View style={createMomentStyle.top}>
         <Pressable onPress={displayDatePicker}>
           <Text
-            style={[buttons.textBig, buttons.confirmTextAlt]}
+            style={[buttons.textBig, buttons.confirmTextAlt, fontsStyle.medium]}
           >{`${day} ${month}, ${year}`}</Text>
         </Pressable>
         <Pressable
-          onPress={displayDatePicker}
+          onPress={showLocationModal}
           style={[createMomentStyle.location]}
         >
-          <Text style={[createMomentStyle.locationText, fontStyle.medium]}>
-            Location
+          <Image source={Location} height={2} width={2} />
+          <Text style={[createMomentStyle.locationText, fontsStyle.medium]}>
+            {locationName}
           </Text>
         </Pressable>
       </View>
@@ -190,7 +225,7 @@ const CreateMoment = ({ route, navigation }) => {
           style={createMomentStyle.guides}
           onPress={() => handleGuide('Unguided')}
         >
-          <Text style={[createMomentStyle.guidesText, fontStyle.medium]}>
+          <Text style={[createMomentStyle.guidesText, fontsStyle.medium]}>
             unguided
           </Text>
         </Pressable>
@@ -198,7 +233,7 @@ const CreateMoment = ({ route, navigation }) => {
           style={createMomentStyle.guides}
           onPress={() => handleGuide('Day Summary')}
         >
-          <Text style={[createMomentStyle.guidesText, fontStyle.medium]}>
+          <Text style={[createMomentStyle.guidesText, fontsStyle.medium]}>
             day summary
           </Text>
         </Pressable>
@@ -206,7 +241,7 @@ const CreateMoment = ({ route, navigation }) => {
           style={createMomentStyle.guides}
           onPress={() => handleGuide('Worth Seeing')}
         >
-          <Text style={[createMomentStyle.guidesText, fontStyle.medium]}>
+          <Text style={[createMomentStyle.guidesText, fontsStyle.medium]}>
             worth seeing
           </Text>
         </Pressable>
@@ -224,39 +259,50 @@ const CreateMoment = ({ route, navigation }) => {
         {selectedPhotos.map((photo, index) => (
           <Pressable
             key={index}
+            onPress={() => deletePicture(index)}
             style={[
               EStyleSheet.child(
                 createMomentStyle,
                 'selectedPictureBtn',
-                index,
-                selectedPhotos.length
+                index > 3
+                  ? index === 4
+                    ? 0
+                    : index === 5
+                    ? 1
+                    : index === 6
+                    ? 2
+                    : index === 7
+                    ? 3
+                    : index === 8
+                    ? 4
+                    : index
+                  : index,
+                selectedPhotos.length > 4 ? 8 : 4
               ),
             ]}
           >
             <Image
-              source={{ uri: photo }}
+              source={{ uri: photo.uri }}
               style={[createMomentStyle.selectedPicture]}
             />
           </Pressable>
         ))}
       </View>
 
-      {show ? (
-        <>
+      <Modal animationType="slide" visible={dateModal}>
+        <SafeAreaView style={[createMomentStyle.modalDate]}>
           <DateTimePicker
             testID="dateTimePicker"
             value={date}
-            mode={mode}
+            mode="date"
             is24Hour
             display="spinner"
             onChange={onChange}
             style={{ height: 300 }}
           />
           <Button title="Done" onPress={hideDatePicker} />
-        </>
-      ) : (
-        <Text />
-      )}
+        </SafeAreaView>
+      </Modal>
 
       <View style={[createMomentStyle.bottom]}>
         <Pressable onPress={showCameraModal} style={[createMomentStyle.camera]}>
@@ -303,11 +349,17 @@ const CreateMoment = ({ route, navigation }) => {
             <View style={[cameraRollStyle.inner]}>
               {photos.map((photo, index) => (
                 <Pressable
+                  key={index}
                   style={[cameraRollStyle.pictureBtn]}
-                  onPress={() => selectPicture(photo.node.image.uri)}
+                  onPress={() =>
+                    selectPicture({
+                      uri: photo.node.image.uri,
+                      type: photo.node.type,
+                      name: photo.node.image.filename,
+                    })
+                  }
                 >
                   <Image
-                    key={index}
                     style={[cameraRollStyle.picture]}
                     source={{ uri: photo.node.image.uri }}
                   />
@@ -315,6 +367,55 @@ const CreateMoment = ({ route, navigation }) => {
               ))}
             </View>
           </ScrollView>
+        </SafeAreaView>
+      </Modal>
+
+      <Modal animationType="slide" visible={locationModal}>
+        <SafeAreaView style={[createMomentStyle.modalMap]}>
+          <PlacesInput
+            googleApiKey="AIzaSyDQVyaJI-QAnwHUHRypk0-L80Qb4PMmcck"
+            placeHolder="Search Location"
+            language="en-US"
+            onSelect={(place) => {
+              setLocationName(place.result.name);
+              setLongitude(place.result.geometry.location.lng);
+              setLatitude(place.result.geometry.location.lat);
+              Keyboard.dismiss();
+            }}
+            stylesContainer={mapStyle.container}
+            stylesList={mapStyle.list}
+          />
+          <MapView
+            initialRegion={{
+              latitude,
+              longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            region={{
+              latitude,
+              longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            style={{
+              height: '100%',
+            }}
+          >
+            <Marker
+              coordinate={{
+                latitude,
+                longitude,
+              }}
+              title="Hey"
+            />
+          </MapView>
+          <Pressable
+            onPress={hideLocationModal}
+            style={[mapStyle.btn, buttons.confirm]}
+          >
+            <Text style={[buttons.confirmText]}>Select</Text>
+          </Pressable>
         </SafeAreaView>
       </Modal>
     </View>

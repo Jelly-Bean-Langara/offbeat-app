@@ -10,6 +10,7 @@ import fontsStyle from './fontsStyle';
 import createMomentStyle from './createMomentStyle';
 import cameraStyle from './cameraStyle';
 import profileStyle from './profileStyle';
+import mapStyle from './mapStyle';
 
 export {
   containers,
@@ -24,4 +25,5 @@ export {
   createMomentStyle,
   cameraStyle,
   profileStyle,
+  mapStyle,
 };

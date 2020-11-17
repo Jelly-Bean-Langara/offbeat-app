@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Image, Pressable, Text } from 'react-native';
+import { Image, Pressable, Text } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Toast from 'react-native-simple-toast';
 import { TextureBackground } from '../../../assets/static';
@@ -42,7 +42,10 @@ const CreateTitle = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollView style={[containers.container, createPostStyle.wrapper]}>
+    <ScrollView
+      scrollEnabled={false}
+      style={[containers.container, createPostStyle.wrapper]}
+    >
       <Text style={[selectCategoryStyle.pageTitle, fontStyle.bold]}>
         Give a <Text style={selectCategoryStyle.pageTitleAlt}>NAME</Text>
       </Text>
