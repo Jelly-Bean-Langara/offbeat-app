@@ -7,7 +7,7 @@ import { weekday, monthNow } from '../../../config/datesArray';
 import { TestPicture, CallToCardBg } from '../../../assets/static';
 
 // Styles
-import { containers, buttons, homeStyle } from '../../../layout';
+import { containers, buttons, homeStyle, fontsStyle } from '../../../layout';
 import api from '../../../services/api';
 
 const Home = ({ navigation }) => {
@@ -43,19 +43,26 @@ const Home = ({ navigation }) => {
 
   return (
     <ScrollView style={[containers.container, homeStyle.wrapper]}>
-      <Text style={homeStyle.today}>
+      <Text style={[homeStyle.today, fontsStyle.medium]}>
         {month} {day}
       </Text>
-      <Text style={homeStyle.pageTitle}>{today}</Text>
+      <Text style={[homeStyle.pageTitle, fontsStyle.medium]}>{today}</Text>
 
       <Pressable style={homeStyle.callTo}>
         <ImageBackground source={CallToCardBg} style={homeStyle.callToBg}>
-          <Text style={homeStyle.callToTitle}>Start your travel journal</Text>
-          <Text style={homeStyle.callToText}>
+          <Text style={[homeStyle.callToTitle, fontsStyle.medium]}>
+            Start your travel journal
+          </Text>
+          <Text style={[homeStyle.callToText, fontsStyle.regular]}>
             Plan ahead or make a time capsule of a trip
           </Text>
           <Text
-            style={[buttons.confirmAlt, buttons.loginText, buttons.fullSize]}
+            style={[
+              buttons.confirmAlt,
+              buttons.loginText,
+              buttons.fullSize,
+              fontsStyle.bold,
+            ]}
           >
             Let&apos;s start
           </Text>
@@ -65,14 +72,16 @@ const Home = ({ navigation }) => {
       {content.map((category, i) => (
         <View key={i}>
           <View style={homeStyle.divisor} key={category.category_id}>
-            <Text style={homeStyle.categoryTitle}>
+            <Text style={[homeStyle.categoryTitle, fontsStyle.medium]}>
               {category.category_title}
             </Text>
             <Pressable
               style={[buttons.small]}
               onPress={() => goToCategoryPage(category.category_id)}
             >
-              <Text style={buttons.confirmTextAlt}>See all</Text>
+              <Text style={[buttons.confirmTextAlt, fontsStyle.medium]}>
+                See all
+              </Text>
             </Pressable>
           </View>
 

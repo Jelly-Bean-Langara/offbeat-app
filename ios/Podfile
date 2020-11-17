@@ -10,6 +10,11 @@ target 'OFFBeat' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
+  rn_maps_path = '../node_modules/react-native-maps'
+  pod 'react-native-google-maps', :path => rn_maps_path
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
+
   target 'OFFBeatTests' do
     inherit! :complete
     # Pods for testing

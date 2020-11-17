@@ -14,7 +14,7 @@ import {
   CreateMoment,
   AllMoments,
 } from './pages/CreatePost';
-import Profile from  './pages/Profile';
+import Profile from './pages/Profile';
 import JourneyDone from './pages/CreatePost/JourneyDone';
 
 const Tab = createBottomTabNavigator();
@@ -73,6 +73,7 @@ const Routes = () => (
         options={{
           headerStyle: navigatorStyle.pageHeader,
           headerShown: true,
+          headerLeft: null,
           title: false,
         }}
       />
@@ -82,10 +83,10 @@ const Routes = () => (
         options={{
           headerStyle: navigatorStyle.pageHeader,
           headerShown: true,
+          headerLeft: null,
           title: false,
         }}
       />
-
     </RootStack.Navigator>
   </NavigationContainer>
 );
