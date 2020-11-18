@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, Image, ScrollView, ImageBackground, Pressable } from 'react-native';
-import { CallToCardBg, TestPicture, TextureBackground } from '../../assets/static';
-import { profileStyle, buttons } from '../../layout';
+import { CallToCardBg, TestPicture } from '../../assets/static';
+import { profileStyle } from '../../layout';
 
 // import { Container } from './styles';
 
@@ -25,7 +25,7 @@ const Profile = () => {
             <Text style={profileStyle.journalsBtn}>Journals</Text>
         </Pressable>
 
-        <Text style={profileStyle.summaryProfile}>Your OffBeat Summary</Text>
+        <Text style={profileStyle.summaryProfile}>Your OFFbeat Summary</Text>
 
         <View style={profileStyle.bkgSummary}>
           <View style={profileStyle.containerContries}>

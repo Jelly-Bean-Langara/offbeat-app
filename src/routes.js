@@ -15,7 +15,9 @@ import {
   AllMoments,
 } from './pages/CreatePost';
 import Profile from  './pages/Profile';
+import Settings from './pages/Settings';
 import JourneyDone from './pages/CreatePost/JourneyDone';
+import Personal from './pages/Personal';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -25,6 +27,7 @@ const TabRoutes = () => {
     <Tab.Navigator tabBarOptions={{ tabStyle: navigatorStyle.tabNav }}>
       <Tab.Screen name="Journals" component={Main} />
       <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
 };
@@ -38,6 +41,11 @@ const Routes = () => (
       <RootStack.Screen
         name="Main"
         component={TabRoutes}
+        options={{ headerStyle: navigatorStyle.pageHeader, headerShown: false }}
+      />
+      <RootStack.Screen
+        name="Personal"
+        component={Personal}
         options={{ headerStyle: navigatorStyle.pageHeader, headerShown: false }}
       />
       <RootStack.Screen

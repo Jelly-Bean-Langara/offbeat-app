@@ -8,6 +8,7 @@ import selectCategoryStyle from './selectCategoryStyle';
 import inputs from './inputs';
 import fontsStyle from './fontsStyle';
 import profileStyle from './profileStyle';
+import settingsStyle from './settingsStyle';
 
 export {
   containers,
@@ -20,4 +21,5 @@ export {
   inputs,
   fontsStyle,
   profileStyle,
+  settingsStyle,
 };
