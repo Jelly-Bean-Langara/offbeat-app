@@ -11,6 +11,11 @@ const inputs = EStyleSheet.create({
     borderRadius: '1rem',
     marginTop: '2rem',
   },
+  bigArea: {
+    height: 130,
+    padding: '1rem',
+    paddingTop: '1rem',
+  },
 });
 
 export default inputs;

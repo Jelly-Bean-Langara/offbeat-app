@@ -16,6 +16,7 @@ import {
 } from './pages/CreatePost';
 import Profile from  './pages/Profile';
 import Settings from './pages/Settings';
+import Profile from './pages/Profile';
 import JourneyDone from './pages/CreatePost/JourneyDone';
 import Personal from './pages/Personal';
 
@@ -81,6 +82,7 @@ const Routes = () => (
         options={{
           headerStyle: navigatorStyle.pageHeader,
           headerShown: true,
+          headerLeft: null,
           title: false,
         }}
       />
@@ -90,10 +92,10 @@ const Routes = () => (
         options={{
           headerStyle: navigatorStyle.pageHeader,
           headerShown: true,
+          headerLeft: null,
           title: false,
         }}
       />
-
     </RootStack.Navigator>
   </NavigationContainer>
 );

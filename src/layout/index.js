@@ -7,8 +7,11 @@ import homeStyle from './homeStyle';
 import selectCategoryStyle from './selectCategoryStyle';
 import inputs from './inputs';
 import fontsStyle from './fontsStyle';
+import createMomentStyle from './createMomentStyle';
+import cameraStyle from './cameraStyle';
 import profileStyle from './profileStyle';
 import settingsStyle from './settingsStyle';
+import mapStyle from './mapStyle';
 
 export {
   containers,
@@ -20,6 +23,9 @@ export {
   selectCategoryStyle,
   inputs,
   fontsStyle,
+  createMomentStyle,
+  cameraStyle,
   profileStyle,
   settingsStyle,
+  mapStyle,
 };

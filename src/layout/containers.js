@@ -23,6 +23,11 @@ const containers = EStyleSheet.create({
     flex: 1,
     height: 70,
   },
+  textureBg: {
+    flex: 1,
+    margin: '1rem',
+    flexDirection: 'column',
+  },
 });
 
 export default containers;
