@@ -11,6 +11,8 @@ import createMomentStyle from './createMomentStyle';
 import cameraStyle from './cameraStyle';
 import profileStyle from './profileStyle';
 import mapStyle from './mapStyle';
+import settingsStyle from './settingsStyle';
+import personalStyle from './personalStyle';
 
 export {
   containers,
@@ -26,4 +28,6 @@ export {
   cameraStyle,
   profileStyle,
   mapStyle,
+  settingsStyle,
+  personalStyle
 };
