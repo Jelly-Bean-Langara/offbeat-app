@@ -103,6 +103,18 @@ const createMomentStyle = EStyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(52, 52, 52, 0.8)',
+  },
+  loadingText: {
+    color: colors.$neutral4,
+    fontSize: '2.5rem',
+    textAlign: 'center',
+    width: '80%',
+  },
 });
 
 export default createMomentStyle;

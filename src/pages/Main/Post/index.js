@@ -1,75 +1,136 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { Text, View, Image, ImageBackground } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  Text,
+  View,
+  Image,
+  ImageBackground,
+  Pressable,
+  Modal,
+  SafeAreaView,
+} from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 import { ScrollView } from 'react-native-gesture-handler';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
-import TestPicture from '../../../assets/static';
-
 // Styles
-import { containers, postStyle } from '../../../layout';
+import {
+  buttons,
+  containers,
+  fontsStyle,
+  postStyle,
+  createMomentStyle,
+  mapStyle,
+} from '../../../layout';
+import api from '../../../services/api';
+import { domain } from '../../../config/domain';
+import { monthNow } from '../../../config/datesArray';
 
-const Post = ({ navigation }) => {
-  const [postData, setPostData] = useState({
-    cover: TestPicture,
-    title: 'Vacouver Island',
-    country: 'Canada',
-    category: 'Weekend Getaway',
-  });
-  const [moments, setMoments] = useState([
-    {
-      date: 'October 29, 2020',
-      location: 'Vancouver Island',
-      time: '10:30PM',
-      cover: TestPicture,
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis ducimus deserunt non provident voluptatibus exercitationem aliquid voluptates repellat, hic quasi maxime cum praesentium, harum consectetur reprehenderit repellendus eaque tempore eos!',
-      pictures: [TestPicture, TestPicture, TestPicture],
-    },
-  ]);
+const Post = ({ route }) => {
+  const [postData, setPostData] = useState({});
+  const [moments, setMoments] = useState([]);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [locationModal, setLocationModal] = useState(false);
+  const [latitude, setLatitude] = useState(1);
+  const [longitude, setLongitude] = useState(1);
+
+  const { postId } = route.params;
+
+  useEffect(() => {
+    async function getPostInfo() {
+      const result = await api.get(`/get-post-by-id?postId=${postId}`);
+      setPostData(result.data);
+    }
+
+    async function getMoments() {
+      const result = await api.get(
+        `/get-all-moments-from-post?postId=${postId}`
+      );
+
+      setMoments(result.data);
+    }
+
+    getMoments();
+    getPostInfo();
+  }, [postId]);
 
   const carouselRef = useRef(null);
 
-  const renderItem = useCallback(
-    (item) => (
+  const renderItem = useCallback((item) => {
+    return (
       <View
         style={{
-          backgroundColor: 'grey',
           borderRadius: 5,
           marginRight: 16,
           height: 300,
         }}
       >
-        <Image source={TestPicture} style={{ width: 200 }} />
+        <Image
+          source={{
+            uri: `${domain}/post/${item.item.moment_picture_file_name}`,
+          }}
+          style={{ width: '100%', height: 400 }}
+          resizeMode="cover"
+        />
       </View>
-    ),
-    []
-  );
+    );
+  }, []);
+
+  const hideLocationModal = () => {
+    setLocationModal(false);
+  };
+
+  const showMap = (latitudeT, longitudeT) => {
+    setLocationModal(true);
+    setLatitude(parseFloat(latitudeT));
+    setLongitude(parseFloat(longitudeT));
+  };
 
   return (
     <ScrollView style={containers.container}>
-      <View>
-        <ImageBackground source={postData.cover} style={postStyle.cover}>
-          <Text>
-            {postData.category} in {postData.country}
+      <ImageBackground
+        source={{ uri: `${domain}/post/${postData.cover}` }}
+        style={postStyle.cover}
+      >
+        <View style={[postStyle.coverBody]}>
+          <Text style={[postStyle.coverTextCat, fontsStyle.medium]}>
+            {postData.category_title}
           </Text>
-          <Text>{postData.title}</Text>
-        </ImageBackground>
-      </View>
+          <Text style={[postStyle.coverTextTitle, fontsStyle.bold]}>
+            {postData.post_title}
+          </Text>
+        </View>
+      </ImageBackground>
 
       {moments.map((moment, index) => (
-        <View key={index}>
-          <Text>{moment.date}</Text>
-          <Text>
-            {moment.location} - {moment.time}
+        <View key={index} style={[postStyle.postMoment]}>
+          <Text style={[postStyle.date, fontsStyle.medium]}>
+            {monthNow[moment.moment_month]} {moment.moment_day},{' '}
+            {moment.moment_year}
           </Text>
-          <Text>{moment.description}</Text>
+          <View style={[postStyle.locationArea]}>
+            <Text style={[postStyle.location, fontsStyle.medium]}>
+              {moment.moment_location_name}
+            </Text>
+            <Pressable
+              style={[buttons.small, buttons.confirm]}
+              onPress={() =>
+                showMap(moment.moment_latitude, moment.moment_longitude)
+              }
+            >
+              <Text style={[fontsStyle.medium, buttons.confirmText]}>
+                Show in map
+              </Text>
+            </Pressable>
+          </View>
+          <Text style={[postStyle.description, fontsStyle.light]}>
+            {moment.moment_description}
+          </Text>
 
           <Carousel
             ref={carouselRef}
             layout="stack"
             layoutCardOffset={10}
-            sliderWidth={400}
+            sliderWidth={380}
             itemWidth={380}
             sliderHeight={300}
             data={moment.pictures}
@@ -77,6 +138,7 @@ const Post = ({ navigation }) => {
             onSnapToItem={(indexItem) => {
               setActiveSlide(indexItem);
             }}
+            style={{ borderRadius: 23, overflow: 'hidden' }}
           />
           <Pagination
             activeDotIndex={activeSlide}
@@ -84,6 +146,35 @@ const Post = ({ navigation }) => {
           />
         </View>
       ))}
+
+      <Modal animationType="slide" visible={locationModal}>
+        <SafeAreaView style={[createMomentStyle.modalMap]}>
+          <MapView
+            region={{
+              latitude,
+              longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            style={{
+              height: '100%',
+            }}
+          >
+            <Marker
+              coordinate={{
+                latitude,
+                longitude,
+              }}
+            />
+          </MapView>
+          <Pressable
+            onPress={hideLocationModal}
+            style={[mapStyle.btn, buttons.confirm]}
+          >
+            <Text style={[buttons.confirmText]}>Close</Text>
+          </Pressable>
+        </SafeAreaView>
+      </Modal>
     </ScrollView>
   );
 };

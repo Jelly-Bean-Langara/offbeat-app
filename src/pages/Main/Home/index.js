@@ -3,8 +3,9 @@ import { Image, Pressable, Text, View, ImageBackground } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { ScrollView } from 'react-native-gesture-handler';
 import { weekday, monthNow } from '../../../config/datesArray';
+import { domain } from '../../../config/domain';
 
-import { TestPicture, CallToCardBg } from '../../../assets/static';
+import { CallToCardBg } from '../../../assets/static';
 
 // Styles
 import { containers, buttons, homeStyle, fontsStyle } from '../../../layout';
@@ -34,11 +35,15 @@ const Home = ({ navigation }) => {
   }, []);
 
   const goToPost = (id) => {
-    navigation.navigate('Post');
+    navigation.navigate('Post', { postId: id });
   };
 
   const goToCategoryPage = (categoryId) => {
     navigation.navigate('Category', { categoryId });
+  };
+
+  const goToSelectCategory = () => {
+    navigation.navigate('SelectCategory');
   };
 
   return (
@@ -48,7 +53,7 @@ const Home = ({ navigation }) => {
       </Text>
       <Text style={[homeStyle.pageTitle, fontsStyle.medium]}>{today}</Text>
 
-      <Pressable style={homeStyle.callTo}>
+      <Pressable style={homeStyle.callTo} onPress={goToSelectCategory}>
         <ImageBackground source={CallToCardBg} style={homeStyle.callToBg}>
           <Text style={[homeStyle.callToTitle, fontsStyle.medium]}>
             Start your travel journal
@@ -99,7 +104,7 @@ const Home = ({ navigation }) => {
               >
                 <View style={homeStyle.cardFigure}>
                   <Image
-                    source={TestPicture}
+                    source={{ uri: `${domain}/post/${post.cover}` }}
                     style={[containers.images, homeStyle.images]}
                     resizeMode="cover"
                   />
