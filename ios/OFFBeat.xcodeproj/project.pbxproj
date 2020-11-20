@@ -62,14 +62,14 @@
 		391345336C1F0738351441E0 /* libPods-OFFBeat-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OFFBeat-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4009DCF2CA44A78CB9A85A64 /* Pods-OFFBeat-OFFBeatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat-OFFBeatTests.debug.xcconfig"; path = "Target Support Files/Pods-OFFBeat-OFFBeatTests/Pods-OFFBeat-OFFBeatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5866229201A2CCE81FF7EC8A /* Pods-OFFBeat-OFFBeatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat-OFFBeatTests.release.xcconfig"; path = "Target Support Files/Pods-OFFBeat-OFFBeatTests/Pods-OFFBeat-OFFBeatTests.release.xcconfig"; sourceTree = "<group>"; };
-		5C2BB0534DFC445DB5E9857F /* Rubik-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Bold.ttf"; path = "../src/assets/fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		5C2BB0534DFC445DB5E9857F /* Rubik-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Bold.ttf"; path = "../src/assets/fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		6950BD6FE7CF60E348301F49 /* Pods-OFFBeat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat.debug.xcconfig"; path = "Target Support Files/Pods-OFFBeat/Pods-OFFBeat.debug.xcconfig"; sourceTree = "<group>"; };
 		7B600711EB02FCB1399113DD /* Pods-OFFBeat-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-OFFBeat-tvOSTests/Pods-OFFBeat-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OFFBeat/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8D7651043FED4E5AB91D8CBB /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../src/assets/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
-		8FAAFCBCE08E4C3CBDBA6D3C /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../src/assets/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
+		8D7651043FED4E5AB91D8CBB /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../src/assets/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		8FAAFCBCE08E4C3CBDBA6D3C /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../src/assets/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
 		98E1C76E87AD537A7950CA63 /* libPods-OFFBeat-OFFBeatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OFFBeat-OFFBeatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8C50C95DADE4CD29F8E26AE /* Rubik-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Regular.ttf"; path = "../src/assets/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		A8C50C95DADE4CD29F8E26AE /* Rubik-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Regular.ttf"; path = "../src/assets/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		B430E5A1C01441C61358EEEF /* libPods-OFFBeat-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OFFBeat-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8CE03F94B60A47C240E98D9 /* Pods-OFFBeat-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat-tvOS.release.xcconfig"; path = "Target Support Files/Pods-OFFBeat-tvOS/Pods-OFFBeat-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		E04EB77A9BDD7D86599708DE /* Pods-OFFBeat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat.release.xcconfig"; path = "Target Support Files/Pods-OFFBeat/Pods-OFFBeat.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,7 +166,6 @@
 				A8C50C95DADE4CD29F8E26AE /* Rubik-Regular.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {

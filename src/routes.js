@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Styles
+import { Image, Pressable } from 'react-native';
 import navigatorStyle from './layout/navigatorStyle';
 
 // Page files
@@ -17,6 +18,9 @@ import {
 import Profile from  './pages/Profile';
 import Settings from './pages/Settings';
 import JourneyDone from './pages/CreatePost/JourneyDone';
+import EditMoment from './pages/EditMoment';
+import { Close } from './assets/static';
+import { buttons } from './layout';
 import Personal from './pages/Personal';
 import SplashScreen from './pages/SplashScreen';
 
@@ -98,6 +102,15 @@ const Routes = () => (
           headerStyle: navigatorStyle.pageHeader,
           headerShown: true,
           headerLeft: null,
+          title: false,
+        }}
+      />
+      <RootStack.Screen
+        name="EditMoment"
+        component={EditMoment}
+        options={{
+          headerStyle: navigatorStyle.pageHeader,
+          headerShown: true,
           title: false,
         }}
       />
