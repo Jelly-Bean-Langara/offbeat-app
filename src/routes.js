@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Styles
-import { Image, Pressable } from 'react-native';
+import { Image } from 'react-native';
 import navigatorStyle from './layout/navigatorStyle';
 
 // Page files
@@ -19,6 +19,16 @@ import Profile from  './pages/Profile';
 import Settings from './pages/Settings';
 import JourneyDone from './pages/CreatePost/JourneyDone';
 import EditMoment from './pages/EditMoment';
+import {
+  ExploreIcon,
+  ExploreIconAlt,
+  JournalIcon,
+  JournalIconAlt,
+  ProfileIcon,
+  ProfileIconAlt,
+} from './assets/static';
+import colors from './layout/colors';
+import Explore from './pages/Explore';
 import { Close } from './assets/static';
 import { buttons } from './layout';
 import Personal from './pages/Personal';
@@ -29,8 +39,39 @@ const RootStack = createStackNavigator();
 
 const TabRoutes = () => {
   return (
-    <Tab.Navigator tabBarOptions={{ tabStyle: navigatorStyle.tabNav }}>
+    <Tab.Navigator
+      tabBarOptions={{
+        tabStyle: navigatorStyle.tabNav,
+        activeTintColor: colors.$primary,
+        inactiveTintColor: '#A5BECE',
+      }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused }) => {
+          let iconName;
+
+          if (route.name === 'Journals') {
+            iconName = focused ? JournalIcon : JournalIconAlt;
+          } else if (route.name === 'Explore') {
+            iconName = focused ? ExploreIcon : ExploreIconAlt;
+          } else if (route.name === 'Profile') {
+            iconName = focused ? ProfileIcon : ProfileIconAlt;
+          }
+
+          // You can return any component that you like here!
+          return (
+            <Image
+              source={iconName}
+              width={1}
+              height={1}
+              resizeMode="contain"
+              resizeMethod="resize"
+            />
+          );
+        },
+      })}
+    >
       <Tab.Screen name="Journals" component={Main} />
+      <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Profile" component={Profile} />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
