@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Styles
-import { Image, Pressable } from 'react-native';
+import { Image } from 'react-native';
 import navigatorStyle from './layout/navigatorStyle';
 
 // Page files
@@ -27,6 +27,7 @@ import {
   ProfileIconAlt,
 } from './assets/static';
 import colors from './layout/colors';
+import Explore from './pages/Explore';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -65,6 +66,7 @@ const TabRoutes = () => {
       })}
     >
       <Tab.Screen name="Journals" component={Main} />
+      <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
