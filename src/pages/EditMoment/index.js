@@ -52,6 +52,7 @@ const EditMoment = ({ route, navigation }) => {
   const [dateModal, setDateModal] = useState(false);
   const [locationModal, setLocationModal] = useState(false);
   const [cameraSide, setCameraSide] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { momentId, postId } = route.params;
   const cameraRef = useRef(null);
@@ -167,6 +168,7 @@ const EditMoment = ({ route, navigation }) => {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
     const formatedDate = new Date(date);
 
     const newDate = `${formatedDate.getFullYear()}-${
@@ -189,6 +191,7 @@ const EditMoment = ({ route, navigation }) => {
         .then((res) => {
           setDescription('');
           setSelectedPhotos([]);
+          setLoading(false);
           navigation.navigate('AllMoments', { postId });
           console.log(res);
         })
@@ -437,6 +440,19 @@ const EditMoment = ({ route, navigation }) => {
           >
             <Text style={[buttons.confirmText]}>Select</Text>
           </Pressable>
+        </SafeAreaView>
+      </Modal>
+
+      <Modal
+        animationType="fade"
+        visible={loading}
+        presentationStyle="overFullScreen"
+        transparent
+      >
+        <SafeAreaView style={[createMomentStyle.loading]}>
+          <Text style={[createMomentStyle.loadingText, fontsStyle.bold]}>
+            We are creating your moment!
+          </Text>
         </SafeAreaView>
       </Modal>
     </View>

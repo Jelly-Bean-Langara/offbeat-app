@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState, useRef } from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
@@ -17,7 +18,6 @@ import Toast from 'react-native-simple-toast';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { RNCamera } from 'react-native-camera';
 import Geolocation from '@react-native-community/geolocation';
-import { GOOGLE_API_KEY } from '@env';
 import PlacesInput from 'react-native-places-input';
 import MapView, { Marker } from 'react-native-maps';
 
@@ -53,6 +53,7 @@ const CreateMoment = ({ route, navigation }) => {
   const [dateModal, setDateModal] = useState(false);
   const [locationModal, setLocationModal] = useState(false);
   const [cameraSide, setCameraSide] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { postId } = route.params;
   const cameraRef = useRef(null);
@@ -164,6 +165,8 @@ const CreateMoment = ({ route, navigation }) => {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
+
     const formatedDate = new Date(date);
 
     const newDate = `${formatedDate.getFullYear()}-${
@@ -189,6 +192,7 @@ const CreateMoment = ({ route, navigation }) => {
         .then((res) => {
           setDescription('');
           setSelectedPhotos([]);
+          setLoading(false);
           navigation.navigate('AllMoments', { postId });
         })
         .catch((err) => {
@@ -435,6 +439,19 @@ const CreateMoment = ({ route, navigation }) => {
           >
             <Text style={[buttons.confirmText]}>Select</Text>
           </Pressable>
+        </SafeAreaView>
+      </Modal>
+
+      <Modal
+        animationType="fade"
+        visible={loading}
+        presentationStyle="overFullScreen"
+        transparent
+      >
+        <SafeAreaView style={[createMomentStyle.loading]}>
+          <Text style={[createMomentStyle.loadingText, fontsStyle.bold]}>
+            We are creating your moment!
+          </Text>
         </SafeAreaView>
       </Modal>
     </View>
