@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Styles
+import { Image, Pressable } from 'react-native';
 import navigatorStyle from './layout/navigatorStyle';
 
 // Page files
@@ -16,6 +17,9 @@ import {
 } from './pages/CreatePost';
 import Profile from './pages/Profile';
 import JourneyDone from './pages/CreatePost/JourneyDone';
+import EditMoment from './pages/EditMoment';
+import { Close } from './assets/static';
+import { buttons } from './layout';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -84,6 +88,15 @@ const Routes = () => (
           headerStyle: navigatorStyle.pageHeader,
           headerShown: true,
           headerLeft: null,
+          title: false,
+        }}
+      />
+      <RootStack.Screen
+        name="EditMoment"
+        component={EditMoment}
+        options={{
+          headerStyle: navigatorStyle.pageHeader,
+          headerShown: true,
           title: false,
         }}
       />
