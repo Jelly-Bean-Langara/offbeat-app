@@ -18,15 +18,52 @@ import {
 import Profile from './pages/Profile';
 import JourneyDone from './pages/CreatePost/JourneyDone';
 import EditMoment from './pages/EditMoment';
-import { Close } from './assets/static';
-import { buttons } from './layout';
+import {
+  ExploreIcon,
+  ExploreIconAlt,
+  JournalIcon,
+  JournalIconAlt,
+  ProfileIcon,
+  ProfileIconAlt,
+} from './assets/static';
+import colors from './layout/colors';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
 
 const TabRoutes = () => {
   return (
-    <Tab.Navigator tabBarOptions={{ tabStyle: navigatorStyle.tabNav }}>
+    <Tab.Navigator
+      tabBarOptions={{
+        tabStyle: navigatorStyle.tabNav,
+        activeTintColor: colors.$primary,
+        inactiveTintColor: '#A5BECE',
+      }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused }) => {
+          let iconName;
+
+          if (route.name === 'Journals') {
+            iconName = focused ? JournalIcon : JournalIconAlt;
+          } else if (route.name === 'Explore') {
+            iconName = focused ? ExploreIcon : ExploreIconAlt;
+          } else if (route.name === 'Profile') {
+            iconName = focused ? ProfileIcon : ProfileIconAlt;
+          }
+
+          // You can return any component that you like here!
+          return (
+            <Image
+              source={iconName}
+              width={1}
+              height={1}
+              resizeMode="contain"
+              resizeMethod="resize"
+            />
+          );
+        },
+      })}
+    >
       <Tab.Screen name="Journals" component={Main} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>

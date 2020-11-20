@@ -32,7 +32,7 @@ import {
   mapStyle,
 } from '../../layout';
 import { monthNow } from '../../config/datesArray';
-import { Camera, Location } from '../../assets/static';
+import { Camera, ChangeCamera, Close, Location } from '../../assets/static';
 import cameraRollStyle from '../../layout/cameraRollStyle';
 
 const EditMoment = ({ route, navigation }) => {
@@ -51,6 +51,7 @@ const EditMoment = ({ route, navigation }) => {
   const [reload, setReload] = useState(false);
   const [dateModal, setDateModal] = useState(false);
   const [locationModal, setLocationModal] = useState(false);
+  const [cameraSide, setCameraSide] = useState(false);
 
   const { momentId, postId } = route.params;
   const cameraRef = useRef(null);
@@ -149,6 +150,10 @@ const EditMoment = ({ route, navigation }) => {
 
   const hideLocationModal = () => {
     setLocationModal(false);
+  };
+
+  const changeSide = () => {
+    setCameraSide(!cameraSide);
   };
 
   const selectPicture = (picture) => {
@@ -329,11 +334,14 @@ const EditMoment = ({ route, navigation }) => {
 
       <Modal animationType="slide" visible={cameraModal}>
         <SafeAreaView>
-          <Button title="Close" onPress={hideCameraModal} />
           <RNCamera
             ref={cameraRef}
             style={cameraStyle.body}
-            type={RNCamera.Constants.Type.front}
+            type={
+              cameraSide
+                ? RNCamera.Constants.Type.front
+                : RNCamera.Constants.Type.back
+            }
             androidCameraPermissionOptions={{
               title: 'Permission to use camera',
               message: 'We need your permission to use your camera',
@@ -347,7 +355,17 @@ const EditMoment = ({ route, navigation }) => {
               buttonNegative: 'Cancel',
             }}
           />
-          <Button title="Snap" onPress={takePicture} />
+          <Pressable style={[cameraStyle.change]} onPress={changeSide}>
+            <Image source={ChangeCamera} />
+          </Pressable>
+          <View style={[cameraStyle.buttonsArea]}>
+            <Pressable onPress={hideCameraModal}>
+              <Image source={Close} />
+            </Pressable>
+            <Pressable onPress={takePicture}>
+              <Image source={Camera} />
+            </Pressable>
+          </View>
           <ScrollView style={[cameraRollStyle.wrapper]}>
             <View style={[cameraRollStyle.inner]}>
               {photos.map((photo, index) => (
