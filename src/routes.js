@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Styles
+import { Image, Pressable } from 'react-native';
 import navigatorStyle from './layout/navigatorStyle';
 
 // Page files
@@ -14,8 +15,14 @@ import {
   CreateMoment,
   AllMoments,
 } from './pages/CreatePost';
-import Profile from './pages/Profile';
+import Profile from  './pages/Profile';
+import Settings from './pages/Settings';
 import JourneyDone from './pages/CreatePost/JourneyDone';
+import EditMoment from './pages/EditMoment';
+import { Close } from './assets/static';
+import { buttons } from './layout';
+import Personal from './pages/Personal';
+import SplashScreen from './pages/SplashScreen';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -25,6 +32,7 @@ const TabRoutes = () => {
     <Tab.Navigator tabBarOptions={{ tabStyle: navigatorStyle.tabNav }}>
       <Tab.Screen name="Journals" component={Main} />
       <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
 };
@@ -38,6 +46,16 @@ const Routes = () => (
       <RootStack.Screen
         name="Main"
         component={TabRoutes}
+        options={{ headerStyle: navigatorStyle.pageHeader, headerShown: false }}
+      />
+      <RootStack.Screen
+        name="Personal"
+        component={Personal}
+        options={{ headerStyle: navigatorStyle.pageHeader, headerShown: false }}
+      />
+      <RootStack.Screen
+        name="SplashScreen"
+        component={SplashScreen}
         options={{ headerStyle: navigatorStyle.pageHeader, headerShown: false }}
       />
       <RootStack.Screen
@@ -84,6 +102,15 @@ const Routes = () => (
           headerStyle: navigatorStyle.pageHeader,
           headerShown: true,
           headerLeft: null,
+          title: false,
+        }}
+      />
+      <RootStack.Screen
+        name="EditMoment"
+        component={EditMoment}
+        options={{
+          headerStyle: navigatorStyle.pageHeader,
+          headerShown: true,
           title: false,
         }}
       />

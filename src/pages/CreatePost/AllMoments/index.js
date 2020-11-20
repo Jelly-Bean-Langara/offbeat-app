@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ImageBackground, Pressable, Text, View } from 'react-native';
+import { ImageBackground, Pressable, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Toast from 'react-native-simple-toast';
 import { monthNow, weekday } from '../../../config/datesArray';
@@ -36,10 +36,18 @@ const AllMoments = ({ route, navigation }) => {
     getPost();
     getJournalCover();
     getMoments();
+
+    navigation.addListener('focus', () => {
+      getMoments();
+    });
   }, []);
 
   const handleAddMoment = () => {
     navigation.navigate('CreateMoment', { postId });
+  };
+
+  const editMoment = (momentId) => {
+    navigation.navigate('EditMoment', { momentId, postId });
   };
 
   const handlePublish = () => {
@@ -79,10 +87,13 @@ const AllMoments = ({ route, navigation }) => {
               monthNow[new Date(moment.moment_date).getMonth()]
             } ${new Date(moment.moment_date).getFullYear()}`}</Text>
             <Text style={[allMomentsStyle.text]}>
-              {moment.moment_description.substr(1, 30)}
+              {moment.moment_description.substr(0, 30)}
             </Text>
             <View style={[allMomentsStyle.buttons]}>
-              <Pressable style={[buttons.small]}>
+              <Pressable
+                style={[buttons.small]}
+                onPress={() => editMoment(moment.moment_id)}
+              >
                 <Text style={[buttons.confirmTextAlt]}>Edit</Text>
               </Pressable>
               <Pressable style={[buttons.small]}>

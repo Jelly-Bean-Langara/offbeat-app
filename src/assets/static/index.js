@@ -4,6 +4,7 @@ import PlusButton from './plus-button.png';
 import TextureBackground from './texture-background.png';
 import Camera from './camera.png';
 import Location from './location.png';
+import Close from './close.png';
 
 export {
   CallToCardBg,
@@ -12,4 +13,5 @@ export {
   TextureBackground,
   Camera,
   Location,
+  Close,
 };
