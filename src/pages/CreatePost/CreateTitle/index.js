@@ -3,6 +3,7 @@ import { Image, Pressable, Text } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Toast from 'react-native-simple-toast';
 import { TextureBackground } from '../../../assets/static';
+import RetrieveCredentials from '../../../secrets/retrieve';
 
 // Styles
 import {
@@ -20,16 +21,26 @@ const CreateTitle = ({ route, navigation }) => {
 
   const { categoryId } = route.params;
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+
+    // get credentials
+    let credentials = await RetrieveCredentials();
+    if (!credentials) {
+      Toast.show('You need to login again!')
+      return;
+    }
+    const user_id = credentials.user_id;
+    const token = credentials.token;
+
     if (title !== '') {
-      api
-        .post('/create-post', { categoryId, title, userId: 1 })
+      api.post('/create-post', { user_id, token, categoryId, title, userId: 1 })
         .then((res) => {
           navigation.navigate('CreateMoment', {
             postId: res.data.insertId,
           });
         })
         .catch((err) => {
+          console.log("handleSubmit -> err", err)
           Toast.show('Make sure that you provide a name');
         });
     } else {

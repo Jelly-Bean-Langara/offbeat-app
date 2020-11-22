@@ -12,6 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		13B67D17364079EB0E382118 /* libPods-OFFBeat-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 391345336C1F0738351441E0 /* libPods-OFFBeat-tvOSTests.a */; };
+		14C0855625660A8600D8346D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14C0855525660A8600D8346D /* Assets.xcassets */; };
 		182336DB259D03B848CB5F35 /* libPods-OFFBeat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 167C069F044EBD788E284F50 /* libPods-OFFBeat.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -56,20 +57,21 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = /Users/leonartgutz/OFFBeat/ios/OFFBeat/Images.xcassets; sourceTree = "<absolute>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = OFFBeat/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = OFFBeat/main.m; sourceTree = "<group>"; };
+		14C0855525660A8600D8346D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../ios projects/demo/demo/Assets.xcassets"; sourceTree = "<group>"; };
 		167C069F044EBD788E284F50 /* libPods-OFFBeat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OFFBeat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* OFFBeat-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OFFBeat-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* OFFBeat-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OFFBeat-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		391345336C1F0738351441E0 /* libPods-OFFBeat-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OFFBeat-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4009DCF2CA44A78CB9A85A64 /* Pods-OFFBeat-OFFBeatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat-OFFBeatTests.debug.xcconfig"; path = "Target Support Files/Pods-OFFBeat-OFFBeatTests/Pods-OFFBeat-OFFBeatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5866229201A2CCE81FF7EC8A /* Pods-OFFBeat-OFFBeatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat-OFFBeatTests.release.xcconfig"; path = "Target Support Files/Pods-OFFBeat-OFFBeatTests/Pods-OFFBeat-OFFBeatTests.release.xcconfig"; sourceTree = "<group>"; };
-		5C2BB0534DFC445DB5E9857F /* Rubik-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Bold.ttf"; path = "../src/assets/fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		5C2BB0534DFC445DB5E9857F /* Rubik-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Bold.ttf"; path = "../src/assets/fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		6950BD6FE7CF60E348301F49 /* Pods-OFFBeat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat.debug.xcconfig"; path = "Target Support Files/Pods-OFFBeat/Pods-OFFBeat.debug.xcconfig"; sourceTree = "<group>"; };
 		7B600711EB02FCB1399113DD /* Pods-OFFBeat-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-OFFBeat-tvOSTests/Pods-OFFBeat-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OFFBeat/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8D7651043FED4E5AB91D8CBB /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../src/assets/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
-		8FAAFCBCE08E4C3CBDBA6D3C /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../src/assets/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
+		8D7651043FED4E5AB91D8CBB /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../src/assets/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		8FAAFCBCE08E4C3CBDBA6D3C /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../src/assets/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
 		98E1C76E87AD537A7950CA63 /* libPods-OFFBeat-OFFBeatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OFFBeat-OFFBeatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8C50C95DADE4CD29F8E26AE /* Rubik-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Regular.ttf"; path = "../src/assets/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		A8C50C95DADE4CD29F8E26AE /* Rubik-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Regular.ttf"; path = "../src/assets/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		B430E5A1C01441C61358EEEF /* libPods-OFFBeat-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OFFBeat-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8CE03F94B60A47C240E98D9 /* Pods-OFFBeat-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat-tvOS.release.xcconfig"; path = "Target Support Files/Pods-OFFBeat-tvOS/Pods-OFFBeat-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		E04EB77A9BDD7D86599708DE /* Pods-OFFBeat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OFFBeat.release.xcconfig"; path = "Target Support Files/Pods-OFFBeat/Pods-OFFBeat.release.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				14C0855525660A8600D8346D /* Assets.xcassets */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -166,7 +169,6 @@
 				A8C50C95DADE4CD29F8E26AE /* Rubik-Regular.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -366,6 +368,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				33C7BDFA47F14F3F846707D9 /* Rubik-Bold.ttf in Resources */,
 				6DE2125632AA4EDC96D6C017 /* Rubik-Light.ttf in Resources */,
+				14C0855625660A8600D8346D /* Assets.xcassets in Resources */,
 				4CC1C05B854344A998CF26AE /* Rubik-Medium.ttf in Resources */,
 				53ECCADE81D64AFFBB04D400 /* Rubik-Regular.ttf in Resources */,
 			);

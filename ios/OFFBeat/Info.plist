@@ -2,18 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Used to allow you to take pictures for your moments</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Used to select pictures for your moments</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Used to select pictures for your moments</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Used to record videos for your moments</string>
-  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-  <string>Used to allow you to choose locations for your moments</string>
-  <key>NSLocationWhenInUseUsageDescription</key>
-  <string>Used to allow you to choose locations for your moments</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -32,6 +20,25 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>offbeat</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>offbeat</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string></string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -49,8 +56,25 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to allow you to take pictures for your moments</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Used to allow you to choose locations for your moments</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+		<string>OffBeat requires a user location to add that location in their travel journies.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Used to record videos for your moments</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Used to select pictures for your moments</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to select pictures for your moments</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Rubik-Bold.ttf</string>
+		<string>Rubik-Light.ttf</string>
+		<string>Rubik-Medium.ttf</string>
+		<string>Rubik-Regular.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -65,12 +89,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
+	<key>UTImportedTypeDeclarations</key>
 	<array>
-		<string>Rubik-Bold.ttf</string>
-		<string>Rubik-Light.ttf</string>
-		<string>Rubik-Medium.ttf</string>
-		<string>Rubik-Regular.ttf</string>
+		<dict/>
 	</array>
 </dict>
 </plist>
