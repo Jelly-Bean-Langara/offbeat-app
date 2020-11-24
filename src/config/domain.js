@@ -1,2 +1,2 @@
-const domain = 'http://localhost:3333/files';
+const domain = 'http://localhost:3333/files/';
 export { domain };

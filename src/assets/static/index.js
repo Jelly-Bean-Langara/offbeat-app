@@ -4,6 +4,7 @@ import PlusButton from './plus-button.png';
 import TextureBackground from './texture-background.png';
 import Camera from './camera.png';
 import Location from './location.png';
+import Cancel from './cancel.png';
 import Close from './close.png';
 import JournalIcon from './journals.png';
 import ExploreIcon from './explore.png';
@@ -20,6 +21,7 @@ export {
   TextureBackground,
   Camera,
   Location,
+  Cancel,
   Close,
   JournalIcon,
   ExploreIcon,
