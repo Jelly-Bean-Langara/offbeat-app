@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ImageBackground, Pressable, Text, View } from 'react-native';
+import {
+  ImageBackground,
+  Pressable,
+  Text,
+  View,
+  Modal,
+  SafeAreaView,
+} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Toast from 'react-native-simple-toast';
 import { monthNow, weekday } from '../../../config/datesArray';
 import { domain } from '../../../config/domain';
-import { buttons, containers, fontsStyle } from '../../../layout';
+import {
+  buttons,
+  containers,
+  fontsStyle,
+  createMomentStyle,
+} from '../../../layout';
 import allMomentsStyle from '../../../layout/allMomentsStyle';
 import api from '../../../services/api';
 
@@ -12,6 +24,7 @@ const AllMoments = ({ route, navigation }) => {
   const [moments, setMoments] = useState([]);
   const [cover, setCover] = useState('');
   const [post, setPost] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const { postId } = route.params;
 
@@ -36,16 +49,42 @@ const AllMoments = ({ route, navigation }) => {
     getPost();
     getJournalCover();
     getMoments();
+
+    navigation.addListener('focus', () => {
+      getMoments();
+    });
   }, []);
+
+  const getMoments = async () => {
+    const result = await api.get(`/get-all-moments-from-post?postId=${postId}`);
+    setMoments(result.data);
+  };
 
   const handleAddMoment = () => {
     navigation.navigate('CreateMoment', { postId });
   };
 
+  const editMoment = (momentId) => {
+    navigation.navigate('EditMoment', { momentId, postId });
+  };
+
+  const handleDeleteMoment = (momentId) => {
+    api
+      .delete(`/delete-moment-from-post?momentId=${momentId}`)
+      .then((response) => {
+        getMoments();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handlePublish = () => {
+    setLoading(true);
     api
       .put('/update-post-visibility', { postId, postVisibility: true })
       .then((res) => {
+        setLoading(false);
         navigation.navigate('JourneyDone');
       })
       .catch((err) => {
@@ -79,13 +118,19 @@ const AllMoments = ({ route, navigation }) => {
               monthNow[new Date(moment.moment_date).getMonth()]
             } ${new Date(moment.moment_date).getFullYear()}`}</Text>
             <Text style={[allMomentsStyle.text]}>
-              {moment.moment_description.substr(1, 30)}
+              {moment.moment_description.substr(0, 30)}
             </Text>
             <View style={[allMomentsStyle.buttons]}>
-              <Pressable style={[buttons.small]}>
+              <Pressable
+                style={[buttons.small]}
+                onPress={() => editMoment(moment.moment_id)}
+              >
                 <Text style={[buttons.confirmTextAlt]}>Edit</Text>
               </Pressable>
-              <Pressable style={[buttons.small]}>
+              <Pressable
+                style={[buttons.small]}
+                onPress={() => handleDeleteMoment(moment.moment_id)}
+              >
                 <Text style={[buttons.confirmTextAlt]}>Remove</Text>
               </Pressable>
             </View>
@@ -112,6 +157,19 @@ const AllMoments = ({ route, navigation }) => {
           </Text>
         </Pressable>
       </View>
+
+      <Modal
+        animationType="fade"
+        visible={loading}
+        presentationStyle="overFullScreen"
+        transparent
+      >
+        <SafeAreaView style={[createMomentStyle.loading]}>
+          <Text style={[createMomentStyle.loadingText, fontsStyle.bold]}>
+            We are publishing your Journey!
+          </Text>
+        </SafeAreaView>
+      </Modal>
     </View>
   );
 };

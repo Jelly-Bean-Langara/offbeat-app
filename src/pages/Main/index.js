@@ -60,7 +60,6 @@ const MainRoutes = ({ navigation }) => {
 
 
   return (
-
     <>
       {/* Login component */}
       {/* will pop up if user is not logged in */}
@@ -110,7 +109,6 @@ const MainRoutes = ({ navigation }) => {
         />
       </Stack.Navigator>
     </>
-
   );
 };
 

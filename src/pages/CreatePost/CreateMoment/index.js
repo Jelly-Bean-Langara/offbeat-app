@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-nested-ternary */
 import React, { useEffect, useState, useRef } from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
@@ -16,7 +18,6 @@ import Toast from 'react-native-simple-toast';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { RNCamera } from 'react-native-camera';
 import Geolocation from '@react-native-community/geolocation';
-import { GOOGLE_API_KEY } from '@env';
 import PlacesInput from 'react-native-places-input';
 import MapView, { Marker } from 'react-native-maps';
 
@@ -32,7 +33,7 @@ import {
   mapStyle,
 } from '../../../layout';
 import { monthNow } from '../../../config/datesArray';
-import { Camera, Location } from '../../../assets/static';
+import { Camera, ChangeCamera, Close, Location } from '../../../assets/static';
 import cameraRollStyle from '../../../layout/cameraRollStyle';
 
 const CreateMoment = ({ route, navigation }) => {
@@ -51,6 +52,8 @@ const CreateMoment = ({ route, navigation }) => {
   const [reload, setReload] = useState(false);
   const [dateModal, setDateModal] = useState(false);
   const [locationModal, setLocationModal] = useState(false);
+  const [cameraSide, setCameraSide] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { postId } = route.params;
   const cameraRef = useRef(null);
@@ -142,6 +145,10 @@ const CreateMoment = ({ route, navigation }) => {
     setLocationModal(false);
   };
 
+  const changeSide = () => {
+    setCameraSide(!cameraSide);
+  };
+
   const selectPicture = (picture) => {
     if (selectedPhotos.length >= 8) {
       selectedPhotos.shift();
@@ -158,6 +165,8 @@ const CreateMoment = ({ route, navigation }) => {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
+
     const formatedDate = new Date(date);
 
     const newDate = `${formatedDate.getFullYear()}-${
@@ -183,6 +192,7 @@ const CreateMoment = ({ route, navigation }) => {
         .then((res) => {
           setDescription('');
           setSelectedPhotos([]);
+          setLoading(false);
           navigation.navigate('AllMoments', { postId });
         })
         .catch((err) => {
@@ -326,11 +336,14 @@ const CreateMoment = ({ route, navigation }) => {
 
       <Modal animationType="slide" visible={cameraModal}>
         <SafeAreaView>
-          <Button title="Close" onPress={hideCameraModal} />
           <RNCamera
             ref={cameraRef}
             style={cameraStyle.body}
-            type={RNCamera.Constants.Type.front}
+            type={
+              cameraSide
+                ? RNCamera.Constants.Type.front
+                : RNCamera.Constants.Type.back
+            }
             androidCameraPermissionOptions={{
               title: 'Permission to use camera',
               message: 'We need your permission to use your camera',
@@ -344,7 +357,17 @@ const CreateMoment = ({ route, navigation }) => {
               buttonNegative: 'Cancel',
             }}
           />
-          <Button title="Snap" onPress={takePicture} />
+          <Pressable style={[cameraStyle.change]} onPress={changeSide}>
+            <Image source={ChangeCamera} />
+          </Pressable>
+          <View style={[cameraStyle.buttonsArea]}>
+            <Pressable onPress={hideCameraModal}>
+              <Image source={Close} />
+            </Pressable>
+            <Pressable onPress={takePicture}>
+              <Image source={Camera} />
+            </Pressable>
+          </View>
           <ScrollView style={[cameraRollStyle.wrapper]}>
             <View style={[cameraRollStyle.inner]}>
               {photos.map((photo, index) => (
@@ -416,6 +439,19 @@ const CreateMoment = ({ route, navigation }) => {
           >
             <Text style={[buttons.confirmText]}>Select</Text>
           </Pressable>
+        </SafeAreaView>
+      </Modal>
+
+      <Modal
+        animationType="fade"
+        visible={loading}
+        presentationStyle="overFullScreen"
+        transparent
+      >
+        <SafeAreaView style={[createMomentStyle.loading]}>
+          <Text style={[createMomentStyle.loadingText, fontsStyle.bold]}>
+            We are creating your moment!
+          </Text>
         </SafeAreaView>
       </Modal>
     </View>
