@@ -18,6 +18,10 @@ const Explore = ({ navigation }) => {
       setPosts(result.data);
     }
 
+    navigation.addListener('focus', () => {
+      getPosts();
+    });
+
     getPosts();
   }, []);
 

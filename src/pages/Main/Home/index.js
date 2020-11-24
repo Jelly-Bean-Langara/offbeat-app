@@ -30,6 +30,10 @@ const Home = ({ navigation }) => {
       setContent(result.data);
     }
 
+    navigation.addListener('focus', () => {
+      getContent();
+    });
+
     getToday();
     getContent();
   }, []);

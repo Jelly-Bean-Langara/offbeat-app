@@ -20,6 +20,7 @@ import { RNCamera } from 'react-native-camera';
 import Geolocation from '@react-native-community/geolocation';
 import PlacesInput from 'react-native-places-input';
 import MapView, { Marker } from 'react-native-maps';
+import ImageEditor from '@react-native-community/image-editor';
 
 // Styles
 import api from '../../../services/api';
@@ -54,6 +55,12 @@ const CreateMoment = ({ route, navigation }) => {
   const [locationModal, setLocationModal] = useState(false);
   const [cameraSide, setCameraSide] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [options, setOptions] = useState({
+    offset: { x: 0, y: 0 },
+    size: { width: 3000, height: 3000 },
+    displaySize: { width: 400, height: 400 },
+    resizeMode: 'contain',
+  });
 
   const { postId } = route.params;
   const cameraRef = useRef(null);
@@ -152,9 +159,18 @@ const CreateMoment = ({ route, navigation }) => {
   const selectPicture = (picture) => {
     if (selectedPhotos.length >= 8) {
       selectedPhotos.shift();
-      setSelectedPhotos([...selectedPhotos, picture]);
+
+      ImageEditor.cropImage(picture.uri, options).then((url) => {
+        console.log('Cropped image uri', url);
+        picture.uri = url;
+        setSelectedPhotos([...selectedPhotos, picture]);
+      });
     } else {
-      setSelectedPhotos([...selectedPhotos, picture]);
+      ImageEditor.cropImage(picture.uri, options).then((url) => {
+        console.log('Cropped image uri', url);
+        picture.uri = url;
+        setSelectedPhotos([...selectedPhotos, picture]);
+      });
     }
     hideCameraModal();
   };

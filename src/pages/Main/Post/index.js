@@ -7,6 +7,7 @@ import {
   Pressable,
   Modal,
   SafeAreaView,
+  ActivityIndicator,
 } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -32,6 +33,7 @@ const Post = ({ route }) => {
   const [locationModal, setLocationModal] = useState(false);
   const [latitude, setLatitude] = useState(1);
   const [longitude, setLongitude] = useState(1);
+  const [spinner, setSpinner] = useState(true);
 
   const { postId } = route.params;
 
@@ -85,11 +87,16 @@ const Post = ({ route }) => {
     setLongitude(parseFloat(longitudeT));
   };
 
+  const finishLoading = () => {
+    setSpinner(false);
+  };
+
   return (
     <ScrollView style={containers.container}>
       <ImageBackground
         source={{ uri: `${domain}/post/${postData.cover}` }}
         style={postStyle.cover}
+        onLoadEnd={finishLoading}
       >
         <View style={[postStyle.coverBody]}>
           <Text style={[postStyle.coverTextCat, fontsStyle.medium]}>
@@ -130,8 +137,8 @@ const Post = ({ route }) => {
             ref={carouselRef}
             layout="stack"
             layoutCardOffset={10}
-            sliderWidth={380}
-            itemWidth={380}
+            sliderWidth={360}
+            itemWidth={360}
             sliderHeight={300}
             data={moment.pictures}
             renderItem={renderItem}
