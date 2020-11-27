@@ -82,13 +82,10 @@ const createMomentStyle = EStyleSheet.create({
     width: 80,
     height: 80,
     marginBottom: '1rem',
+    marginLeft: '.5rem',
   },
   'selectedPictureBtn:first-child': {
     marginLeft: '1rem',
-  },
-  'selectedPictureBtn:nth-child-odd': {
-    marginLeft: '1.4rem',
-    marginRight: '1rem',
   },
   selectedPicture: {
     width: 80,

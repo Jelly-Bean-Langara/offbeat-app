@@ -15,7 +15,8 @@ const exploreStyle = EStyleSheet.create({
   },
   card: {
     width: 150,
-    height: 150,
+    height: 200,
+    marginBottom: '1rem',
   },
   cardWrapper: {
     padding: '1.5rem',

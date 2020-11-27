@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useState } from 'react';
 import { Image, Pressable, Text } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
@@ -22,25 +23,31 @@ const CreateTitle = ({ route, navigation }) => {
   const { categoryId } = route.params;
 
   const handleSubmit = async () => {
-
     // get credentials
-    let credentials = await RetrieveCredentials();
+    const credentials = await RetrieveCredentials();
     if (!credentials) {
-      Toast.show('You need to login again!')
+      Toast.show('You need to login again!');
       return;
     }
-    const user_id = credentials.user_id;
-    const token = credentials.token;
+    const { user_id, token } = credentials;
+
+    console.log(user_id);
 
     if (title !== '') {
-      api.post('/create-post', { user_id, token, categoryId, title, userId: 1 })
+      api
+        .post('/create-post', {
+          token,
+          categoryId,
+          title,
+          userId: user_id,
+        })
         .then((res) => {
           navigation.navigate('CreateMoment', {
             postId: res.data.insertId,
           });
         })
         .catch((err) => {
-          console.log("handleSubmit -> err", err)
+          console.log('handleSubmit -> err', err);
           Toast.show('Make sure that you provide a name');
         });
     } else {
