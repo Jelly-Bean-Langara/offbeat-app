@@ -11,7 +11,7 @@ async function StoreCredentials(user_id, token, name, email, picture) {
     // store credentials with encryption
     await Keychain.setGenericPassword(user_id, token);
     // store insensitive
-    await AsyncStorage.setItem('ifLoggedIn', "true");
+    await AsyncStorage.setItem('ifLoggedIn', 'true');
     await AsyncStorage.setItem('user_name', name);
     await AsyncStorage.setItem('user_email', email);
     await AsyncStorage.setItem('user_picture', picture);
@@ -22,4 +22,4 @@ async function StoreCredentials(user_id, token, name, email, picture) {
   }
 }
 
-export default ( StoreCredentials );
+export default StoreCredentials;

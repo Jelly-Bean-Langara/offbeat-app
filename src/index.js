@@ -2,22 +2,22 @@ import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { SafeAreaView, StatusBar, Linking } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import Routes from './routes';
 import { containers } from './layout';
 import Login from './pages/Login';
-import Toast from 'react-native-simple-toast';
 import StoreCredentials from './secrets/store';
 import RetrieveCredentials from './secrets/retrieve';
+
+console.disableYellowBox = true;
 
 EStyleSheet.build();
 
 const link = {
   prefixes: ['offbeat://'],
-}
-
+};
 
 const App = () => {
-
   // state to check if user is logged in or not
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -75,7 +75,6 @@ const App = () => {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={containers.topSafeArea} />
       <SafeAreaView style={containers.safeArea}>
-
         {/* <Login /> */}
         {/* {!isLoggedIn && <Login />} */}
 

@@ -85,7 +85,7 @@ const AllMoments = ({ route, navigation }) => {
       .put('/update-post-visibility', { postId, postVisibility: true })
       .then((res) => {
         setLoading(false);
-        navigation.navigate('JourneyDone');
+        navigation.navigate('Journals');
       })
       .catch((err) => {
         Toast.showWithGravity(

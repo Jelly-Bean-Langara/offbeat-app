@@ -5,8 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // check if user is logged in
 async function CheckIfLoggedIn() {
   try {
-    const value = await AsyncStorage.getItem('ifLoggedIn')
-    if (value !== null && value == "true") {
+    const value = await AsyncStorage.getItem('ifLoggedIn');
+    if (value !== null && value === 'true') {
       return true;
     }
   } catch (e) {
@@ -14,4 +14,4 @@ async function CheckIfLoggedIn() {
   }
 }
 
-export default (CheckIfLoggedIn);
+export default CheckIfLoggedIn;
