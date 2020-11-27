@@ -15,7 +15,7 @@ import {
   CreateMoment,
   AllMoments,
 } from './pages/CreatePost';
-import Profile from  './pages/Profile';
+import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import JourneyDone from './pages/CreatePost/JourneyDone';
 import EditMoment from './pages/EditMoment';
@@ -26,10 +26,11 @@ import {
   JournalIconAlt,
   ProfileIcon,
   ProfileIconAlt,
+  Close,
 } from './assets/static';
 import colors from './layout/colors';
 import Explore from './pages/Explore';
-import { Close } from './assets/static';
+
 import { buttons } from './layout';
 import Personal from './pages/Personal';
 import SplashScreen from './pages/SplashScreen';
@@ -73,7 +74,7 @@ const TabRoutes = () => {
       <Tab.Screen name="Journals" component={Main} />
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Settings" component={Settings} />
+      {/* <Tab.Screen name="Settings" component={Settings} /> */}
     </Tab.Navigator>
   );
 };

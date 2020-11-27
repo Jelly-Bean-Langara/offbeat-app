@@ -125,6 +125,7 @@ const CreateMoment = ({ route, navigation }) => {
 
   const handleGuide = (text) => {
     setPlaceholder(text);
+    setDescription(text);
   };
 
   const displayDatePicker = () => {
@@ -161,13 +162,11 @@ const CreateMoment = ({ route, navigation }) => {
       selectedPhotos.shift();
 
       ImageEditor.cropImage(picture.uri, options).then((url) => {
-        console.log('Cropped image uri', url);
         picture.uri = url;
         setSelectedPhotos([...selectedPhotos, picture]);
       });
     } else {
       ImageEditor.cropImage(picture.uri, options).then((url) => {
-        console.log('Cropped image uri', url);
         picture.uri = url;
         setSelectedPhotos([...selectedPhotos, picture]);
       });
@@ -249,7 +248,7 @@ const CreateMoment = ({ route, navigation }) => {
       >
         <Pressable
           style={createMomentStyle.guides}
-          onPress={() => handleGuide('Unguided')}
+          onPress={() => handleGuide('Type your text here')}
         >
           <Text style={[createMomentStyle.guidesText, fontsStyle.medium]}>
             unguided
@@ -257,18 +256,62 @@ const CreateMoment = ({ route, navigation }) => {
         </Pressable>
         <Pressable
           style={createMomentStyle.guides}
-          onPress={() => handleGuide('Day Summary')}
+          onPress={() =>
+            handleGuide(
+              'Write about a restaurant experience, new flavours and dishes that you discovered on the way. Any bad experience is also worth sharing!'
+            )
+          }
         >
           <Text style={[createMomentStyle.guidesText, fontsStyle.medium]}>
-            day summary
+            food
           </Text>
         </Pressable>
         <Pressable
           style={createMomentStyle.guides}
-          onPress={() => handleGuide('Worth Seeing')}
+          onPress={() =>
+            handleGuide(
+              'It was a sunny day with a beautiful blue sky. The green leaves swaying when viewing in a pleasant climate. Without a cloud in the sky, it made the sunset perfect.'
+            )
+          }
+        >
+          <Text style={[createMomentStyle.guidesText, fontsStyle.medium]}>
+            good day
+          </Text>
+        </Pressable>
+        <Pressable
+          style={createMomentStyle.guides}
+          onPress={() =>
+            handleGuide(
+              'Writing can be very therapeutic. It will help you to feel better. You can also help your readers to avoid bad experiences.'
+            )
+          }
+        >
+          <Text style={[createMomentStyle.guidesText, fontsStyle.medium]}>
+            bad day
+          </Text>
+        </Pressable>
+        <Pressable
+          style={createMomentStyle.guides}
+          onPress={() =>
+            handleGuide(
+              'A wonderful place that must be visited at least once in your life, a perfect trail that leads to the top of the mountains with a wonderful view of the lake.'
+            )
+          }
         >
           <Text style={[createMomentStyle.guidesText, fontsStyle.medium]}>
             worth seeing
+          </Text>
+        </Pressable>
+        <Pressable
+          style={createMomentStyle.guides}
+          onPress={() =>
+            handleGuide(
+              'Write about your experience of finding accommodation. How was your stay? What did you think about the staff?'
+            )
+          }
+        >
+          <Text style={[createMomentStyle.guidesText, fontsStyle.medium]}>
+            accomodation
           </Text>
         </Pressable>
       </ScrollView>
@@ -324,7 +367,7 @@ const CreateMoment = ({ route, navigation }) => {
             is24Hour
             display="spinner"
             onChange={onChange}
-            style={{ height: 300 }}
+            style={{ height: 400 }}
           />
           <Button title="Done" onPress={hideDatePicker} />
         </SafeAreaView>
