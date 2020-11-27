@@ -96,7 +96,6 @@ const Post = ({ route }) => {
       <ImageBackground
         source={{ uri: `${domain}/post/${postData.cover}` }}
         style={postStyle.cover}
-        onLoadEnd={finishLoading}
       >
         <View style={[postStyle.coverBody]}>
           <Text style={[postStyle.coverTextCat, fontsStyle.medium]}>

@@ -9,6 +9,8 @@ import Login from './pages/Login';
 import StoreCredentials from './secrets/store';
 import RetrieveCredentials from './secrets/retrieve';
 
+console.disableYellowBox = true;
+
 EStyleSheet.build();
 
 const link = {

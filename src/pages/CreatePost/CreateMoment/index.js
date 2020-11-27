@@ -53,13 +53,13 @@ const CreateMoment = ({ route, navigation }) => {
   const [reload, setReload] = useState(false);
   const [dateModal, setDateModal] = useState(false);
   const [locationModal, setLocationModal] = useState(false);
-  const [cameraSide, setCameraSide] = useState(false);
+  const [cameraSide, setCameraSide] = useState(true);
   const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState({
     offset: { x: 0, y: 0 },
-    size: { width: 3000, height: 3000 },
-    displaySize: { width: 400, height: 400 },
-    resizeMode: 'contain',
+    size: { width: 2000, height: 2000 },
+    displaySize: { width: 500, height: 500 },
+    resizeMode: 'cover',
   });
 
   const { postId } = route.params;
@@ -212,8 +212,11 @@ const CreateMoment = ({ route, navigation }) => {
         })
         .catch((err) => {
           console.log(err);
+
+          setLoading(false);
         });
     } else {
+      setLoading(false);
       Toast.showWithGravity(
         'You need to provide a description to this moment.',
         Toast.LONG,
@@ -353,6 +356,7 @@ const CreateMoment = ({ route, navigation }) => {
             <Image
               source={{ uri: photo.uri }}
               style={[createMomentStyle.selectedPicture]}
+              resizeMode="cover"
             />
           </Pressable>
         ))}
