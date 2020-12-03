@@ -87,10 +87,6 @@ const Post = ({ route }) => {
     setLongitude(parseFloat(longitudeT));
   };
 
-  const finishLoading = () => {
-    setSpinner(false);
-  };
-
   return (
     <ScrollView style={containers.container}>
       <ImageBackground
