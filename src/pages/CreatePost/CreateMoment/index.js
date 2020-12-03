@@ -56,9 +56,9 @@ const CreateMoment = ({ route, navigation }) => {
   const [cameraSide, setCameraSide] = useState(true);
   const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState({
-    offset: { x: 0, y: 0 },
-    size: { width: 2000, height: 2000 },
-    displaySize: { width: 500, height: 500 },
+    offset: { x: 100, y: 0 },
+    size: { width: 1000, height: 1000 },
+    displaySize: { width: 700, height: 700 },
     resizeMode: 'cover',
   });
 
