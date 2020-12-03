@@ -53,8 +53,6 @@ const Post = ({ route }) => {
 
     getMoments();
     getPostInfo();
-
-    console.log(postData);
   }, [postId]);
 
   const carouselRef = useRef(null);
