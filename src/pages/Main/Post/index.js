@@ -53,6 +53,8 @@ const Post = ({ route }) => {
 
     getMoments();
     getPostInfo();
+
+    console.log(postData);
   }, [postId]);
 
   const carouselRef = useRef(null);
@@ -85,10 +87,6 @@ const Post = ({ route }) => {
     setLocationModal(true);
     setLatitude(parseFloat(latitudeT));
     setLongitude(parseFloat(longitudeT));
-  };
-
-  const finishLoading = () => {
-    setSpinner(false);
   };
 
   return (
